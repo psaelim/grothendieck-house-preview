@@ -405,14 +405,14 @@
     <div class="hero__objects reveal" aria-hidden="true">
       <div class="bookwrap bw-back" data-book="back">
         <div class="book-px">
-          <video class="cover-vid" muted playsinline preload="auto" poster="assets/hlw-rotate-poster.png">
+          <video class="cover-vid" muted playsinline preload="none" poster="assets/hlw-rotate-poster.png">
             <source src="assets/hlw-rotate.webm" type="video/webm">
           </video>
         </div>
       </div>
       <div class="bookwrap bw-front" data-book="front">
         <div class="book-px">
-          <video class="cover-vid" muted playsinline preload="auto" poster="assets/pp-rotate-poster.png">
+          <video class="cover-vid" muted playsinline preload="none" poster="assets/pp-rotate-poster.png">
             <source src="assets/pp-rotate.webm" type="video/webm">
           </video>
         </div>
@@ -627,6 +627,32 @@
 
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---- hero books: the rotation clips are VP9-alpha WebM, which only Chromium/Firefox honor.
+     WebKit (desktop Safari + ALL iOS browsers, incl. iOS Chrome) ignores the alpha channel → it shows the
+     green chroma background, and the clips are slow to fetch on cellular. The rotation also only matters
+     where you can hover (desktop). So: keep the video ONLY on a hover-capable, non-WebKit browser; otherwise
+     swap in the static transparent poster PNG (the ¾ rest pose) — no green, and no video download at all. */
+  (function(){
+    var ua = navigator.userAgent || '';
+    var isWebKit = /iPad|iPhone|iPod/.test(ua) ||
+      (/Safari/.test(ua) && !/Chrome|Chromium|CriOS|Android|Edg|OPR|Firefox|FxiOS/.test(ua));
+    var canHover = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+    var useVideoRotation = canHover && !isWebKit && !reduce;
+    var vids = document.querySelectorAll('video.cover-vid');
+    if (useVideoRotation){
+      Array.prototype.forEach.call(vids, function(v){ v.preload = 'auto'; try{ v.load(); }catch(e){} });
+    } else {
+      Array.prototype.forEach.call(vids, function(v){
+        var img = document.createElement('img');
+        img.className = v.className;                 // keep .cover-vid (height / float / drop-shadow)
+        img.src = v.getAttribute('poster');          // transparent ¾ rest pose — what we show statically
+        img.alt = ''; img.setAttribute('aria-hidden','true');
+        img.decoding = 'async'; img.loading = 'eager';
+        if (v.parentNode) v.parentNode.replaceChild(img, v);
+      });
+    }
+  })();
+
   /* ---- reveal on scroll (the "flow") ---- */
   var items = document.querySelectorAll('.reveal');
   if (reduce || !('IntersectionObserver' in window)){
@@ -646,8 +672,8 @@
     var objects = document.querySelector('.hero__objects');
     var bf = document.querySelector('.bw-front');
     var bb = document.querySelector('.bw-back');
-    var vf = bf && bf.querySelector('.cover-vid');   // dark / Predictive Present rotation clip
-    var vb = bb && bb.querySelector('.cover-vid');   // cream / How Language Works rotation clip
+    var vf = bf && bf.querySelector('video.cover-vid');   // dark / Predictive Present rotation clip (null if swapped to <img> on WebKit/touch)
+    var vb = bb && bb.querySelector('video.cover-vid');   // cream / How Language Works rotation clip
     var pxEls = Array.prototype.slice.call(document.querySelectorAll('[data-px]'));
     var tX=0,tY=0, pX=0,pY=0, sY=window.scrollY||0, ticking=false, booksHover=false;
     var ctX=0,ctY=0, rxC=0,ryC=0;            // cursor over the art (for the 3D tilt) + eased tilt angles
