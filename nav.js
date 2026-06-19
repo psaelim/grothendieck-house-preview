@@ -58,6 +58,8 @@
 
   // ---- styles for the mobile-menu chrome (injected once, after the page's own <style> so it wins) ----
   var css =
+    /* logo nudged 4pt lower in the nav bar (transform → no layout shift; applies on every page) */
+    '.mark{transform:translateY(4pt)}' +
     /* burger → X morph */
     '.burger span{transition:transform .32s cubic-bezier(.4,0,.2,1),opacity .2s ease}' +
     '.nav.open .burger span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}' +
