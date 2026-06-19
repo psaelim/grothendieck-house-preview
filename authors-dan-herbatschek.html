@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ============================================================================
+     GROTHENDIECK HOUSE — Author profile: Dan Herbatschek  (/authors/dan-herbatschek)
+     Companion to the homepage redesign (prototypes/evolved-home-v3.html).
+
+     NOTE on site structure (corrected 2026-06-18, per the live site): this is the
+     AUTHOR profile — NOT the /about/ page. /about/ is "about the house" (see about.html);
+     this is the writer's page reached from Authors, the Dan-Brown-style profile STATUS
+     listed as the pending follow-up.
+
+     Built from Dan's supplied "About me" copy (2026-06-18): large portrait + big name
+     hero, long-form editorial bio with a pull-quote, a facts strip (Education / Field /
+     Titles / Essays), and the two titles in the house. Inherits the v3 design system
+     VERBATIM — same tokens, fonts (EB Garamond wordmark · Newsreader serif · Archivo
+     grotesque), gold "kind of yellow" hairlines, nav, footer, dark+light toggle, and
+     reveal-on-scroll "flow".
+
+     PLACEHOLDER: portrait = assets/herbatschek.png (the live-site stand-in, same image
+     the live author page uses). Drop in the hi-res photo Dan is sending — the frame is
+     4:5, object-fit:cover, so it swaps cleanly. Type/motion respect reduced-motion.
+============================================================================ -->
+
+<title>Dan Herbatschek — Grothendieck House</title>
+<meta name="description" content="Dan Herbatschek founded Grothendieck House and wrote its first two titles. Mathematician, founder of Ramsey Theory Group, and author of The Predictive Present and How Language Works.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#14110E">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Grothendieck House">
+<meta property="og:title" content="Dan Herbatschek — Grothendieck House">
+<meta property="og:description" content="Mathematician, founder of Ramsey Theory Group, and author of the house's first two titles.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.sanity.io">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=EB+Garamond:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet"><style>
+  :root{
+    /* dark (default) — identical to evolved-home-v3 */
+    --bg:#14110E; --bg-2:#1A1712; --text:#ECE6D7; --text-2:#A8A092; --text-3:#7C7468;
+    --line:#2C2820; --line-2:#393428; --accent:#C9A24E; --accent-ink:#14110E;
+    --hair:.5px;
+    --hair-color:color-mix(in srgb,var(--accent) 40%,transparent);
+    --logo:18px;
+    --shadow:0 44px 80px rgba(0,0,0,.62);
+    --serif:"Newsreader",Georgia,"Times New Roman",serif;
+    --ui:"Archivo","Helvetica Neue",Arial,sans-serif;
+    --wordmark:"EB Garamond",Georgia,"Times New Roman",serif;
+    --pad:clamp(20px,5vw,80px);
+    --maxw:1320px;
+    --edge:max(var(--pad), calc((100vw - var(--maxw))/2 + var(--pad)));
+  }
+  body.light{
+    --bg:#F5F4F1; --bg-2:#EDECE7; --text:#1A1611; --text-2:#5B5953; --text-3:#868480;
+    --line:#E3E1DC; --line-2:#D4D2CC; --accent:#8A6A22; --accent-ink:#F5F4F1;
+    --shadow:0 40px 70px rgba(30,26,18,.18);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--text);font-family:var(--serif);
+    font-optical-sizing:auto;font-size:18px;line-height:1.6;
+    font-feature-settings:"kern" 1,"liga" 1;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    overflow-x:hidden;transition:background .45s ease,color .45s ease;
+  }
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-weight:400;text-wrap:balance}
+  p{text-wrap:pretty}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,32px)}
+  .label{font-family:var(--ui);font-size:11.5px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--text-3)}
+  .accent{color:var(--accent)}
+  .i{font-style:italic}
+  .nums{font-feature-settings:"onum" 1,"tnum" 1,"kern" 1}
+  .skip{position:absolute;left:-9999px}
+  .skip:focus{left:16px;top:12px;z-index:100;background:var(--bg-2);
+    font-family:var(--ui);font-size:13px;padding:10px 14px;border:1px solid var(--line)}
+
+  /* ---------------- header / logo (live-site serif lockup) ---------------- */
+  .nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);
+    backdrop-filter:saturate(140%) blur(10px);border-bottom:var(--hair) solid var(--hair-color);
+    transition:background .45s ease,border-color .45s ease}
+  .nav__in{display:flex;align-items:center;justify-content:space-between;gap:24px;
+    height:78px;max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+  .mark{font-family:var(--wordmark);line-height:.98;text-align:center;white-space:nowrap}
+  .mark__name{display:block;font-size:var(--logo);font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text)}
+  .mark__sub{display:block;font-size:calc(var(--logo) * .556);font-weight:500;letter-spacing:.62em;text-transform:uppercase;
+    color:var(--text-2);margin-top:4px;padding-left:.62em}
+  .nav__links{display:flex;gap:32px}
+  .nav__links a{font-family:var(--ui);font-size:12px;font-weight:500;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--text-2);transition:color .2s;position:relative}
+  .nav__links a::after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:1px;
+    background:var(--accent);transition:right .25s ease}
+  .nav__links a:hover,.nav__links a[aria-current]{color:var(--text)}
+  .nav__links a[aria-current]::after,.nav__links a:hover::after{right:0}
+  .nav__right{display:flex;align-items:center;gap:16px}
+  .invert{font-family:var(--ui);font-size:11px;font-weight:500;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--text-2);background:none;border:1px solid var(--line-2);
+    padding:8px 14px;cursor:pointer;transition:color .2s,border-color .2s}
+  .invert:hover{color:var(--text);border-color:var(--text)}
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px}
+  .burger span{width:24px;height:1.5px;background:var(--text)}
+  .mobile{display:none}
+
+  /* ---------------- about hero (asymmetric: name + lead, portrait bleeds right) -------- */
+  .ab-hero{position:relative;padding-left:var(--edge);padding-right:var(--pad);
+    padding-block:clamp(48px,9vh,104px) clamp(40px,7vh,80px);overflow:hidden}
+  .ab-hero__in{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,4vw,56px);
+    align-items:center;max-width:var(--maxw)}
+  .ab-hero__text{grid-column:1 / 8}
+  .ab-hero__eyebrow{color:var(--accent);font-family:var(--ui);font-size:11px;font-weight:600;
+    letter-spacing:.18em;text-transform:uppercase;margin-bottom:clamp(18px,3vh,26px)}
+  .ab-hero__name{font-size:clamp(46px,7vw,104px);line-height:.98;letter-spacing:-.028em}
+  .ab-hero__role{font-style:italic;color:var(--text-2);font-size:clamp(17px,1.9vw,23px);
+    margin-top:clamp(16px,2.6vh,24px);line-height:1.4;max-width:30ch}
+  .ab-hero__flow{margin-top:clamp(26px,4vh,40px);display:flex;flex-direction:column;
+    align-items:flex-start;gap:16px}
+  .ab-hero__tagline{font-family:var(--serif);font-style:italic;font-size:clamp(16px,1.7vw,21px);
+    color:var(--text-2);max-width:34ch;line-height:1.42}
+  .ab-hero__tagline .accent{font-style:normal;font-weight:500}
+  .ab-hero__rule{width:64px;height:var(--hair);background:var(--hair-color)}
+
+  .ab-hero__portrait{grid-column:8 / 13;display:flex;justify-content:flex-end;
+    transform:translateY(var(--py,0px));will-change:transform}
+  .ab-hero__portrait figure{position:relative;width:min(100%,460px);
+    animation:port-float 9s ease-in-out infinite}
+  .ab-hero__portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 28%;
+    border-radius:2px;background:var(--bg-2);border:var(--hair) solid var(--hair-color);
+    filter:drop-shadow(var(--shadow))}
+  /* empty placeholder frame — awaiting Dan's hi-res portrait (same 4:5 box as the img above) */
+  .ab-hero__ph{width:100%;aspect-ratio:4/5;border-radius:2px;background:var(--bg-2);
+    border:var(--hair) solid var(--hair-color);filter:drop-shadow(var(--shadow))}
+  .ab-hero__portrait figcaption{font-family:var(--ui);font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--text-3);margin-top:14px;text-align:right}
+  @keyframes port-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+  /* ---------------- biography (long-form editorial measure) ---------------- */
+  .bio{padding-block:clamp(56px,9vh,120px);border-top:var(--hair) solid var(--hair-color)}
+  .bio__head{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,32px);
+    align-items:baseline;padding-bottom:22px;margin-bottom:clamp(34px,5vh,56px)}
+  .bio__head .label{grid-column:1 / 4}
+  .bio__head h2{grid-column:4 / 12;font-size:clamp(22px,2.4vw,30px);line-height:1.3;
+    letter-spacing:-.01em;color:var(--text-2);font-style:italic}
+  .bio__body{grid-column:4 / 11;max-width:62ch}
+  .bio__lead-label{grid-column:1 / 4}
+  .bio__body p{font-size:clamp(17px,1.55vw,19px);line-height:1.72}
+  .bio__body p+p{margin-top:1.15em}
+  .bio__body .i{font-style:italic}
+  .bio__body a{border-bottom:var(--hair) solid var(--hair-color);transition:color .2s,border-color .2s}
+  .bio__body a:hover{color:var(--accent);border-color:var(--accent)}
+  /* drop cap on the opening paragraph, matching the manifesto treatment on the homepage */
+  .bio__body .lede::first-letter{font-family:var(--serif);font-weight:500;font-size:3.4em;line-height:.72;
+    float:left;padding:6px 12px 0 0;color:var(--accent)}
+
+  .pull{grid-column:4 / 12;margin:clamp(34px,5vh,52px) 0;padding-left:clamp(20px,2.4vw,32px);
+    border-left:2px solid var(--accent)}
+  .pull p{font-family:var(--serif);font-style:italic;font-size:clamp(22px,3vw,34px);
+    line-height:1.22;letter-spacing:-.012em;color:var(--text);max-width:20ch}
+
+  /* ---------------- facts strip (Education / Field / Titles / Essays) ---------------- */
+  .facts{padding-block:clamp(48px,7vh,90px);border-top:var(--hair) solid var(--hair-color);
+    background:var(--bg-2);transition:background .45s ease}
+  .facts__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px)}
+  .fact .k{font-family:var(--ui);font-size:10.5px;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+  .fact .v{font-family:var(--serif);font-size:clamp(15px,1.3vw,17px);line-height:1.5;color:var(--text)}
+  .fact .v a{border-bottom:var(--hair) solid var(--hair-color);transition:color .2s,border-color .2s}
+  .fact .v a:hover{color:var(--accent);border-color:var(--accent)}
+  .fact .v .i{font-style:italic}
+
+  /* ---------------- titles in the house ---------------- */
+  .titles{padding-block:clamp(64px,10vh,140px)}
+  .titles .s-head{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,32px);
+    align-items:baseline;padding-bottom:22px;border-bottom:var(--hair) solid var(--hair-color);
+    margin-bottom:clamp(40px,7vh,72px)}
+  .titles .s-head h2{grid-column:1 / 8;font-size:clamp(28px,3.6vw,46px);letter-spacing:-.018em}
+  .titles .s-head .label{grid-column:9 / 13;text-align:right;align-self:end}
+  .titles__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px)}
+  .title-card{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,2.4vw,32px);align-items:start}
+  .title-card__cover{width:clamp(120px,15vw,184px)}
+  .title-card__cover img{width:100%;filter:drop-shadow(var(--shadow));border-radius:2px;
+    transition:transform .4s cubic-bezier(.4,0,.2,1)}
+  .title-card:hover .title-card__cover img{transform:translateY(-6px)}
+  .title-card__folio{display:flex;align-items:center;gap:12px;margin-bottom:16px;color:var(--accent)}
+  .title-card__folio .n{font-family:var(--ui);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+  .title-card__folio .rule{height:var(--hair);width:34px;background:var(--hair-color)}
+  .title-card__name{font-size:clamp(22px,2.4vw,30px);line-height:1.05;letter-spacing:-.016em}
+  .title-card__name a{transition:color .2s}
+  .title-card__name a:hover{color:var(--accent)}
+  .title-card__sub{font-style:italic;color:var(--text-2);font-size:clamp(15px,1.4vw,17px);margin-top:8px;line-height:1.25}
+  .title-card__meta{font-family:var(--ui);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--text-3);margin-top:18px}
+
+  /* ---------------- footer (identical to homepage) ---------------- */
+  footer{border-top:var(--hair) solid var(--hair-color)}
+  .foot{padding-block:clamp(56px,8vh,92px);align-items:start}
+  .foot__brand{grid-column:1 / 5}
+  .foot__brand .foot__mark{display:inline-block;font-family:var(--wordmark);font-size:26px;
+    font-weight:400;line-height:1.1;letter-spacing:0;color:var(--text);transition:color .2s}
+  .foot__brand .foot__mark:hover{color:var(--accent)}
+  .foot__brand p{font-size:16px;color:var(--text-2);max-width:32ch;margin-top:18px;line-height:1.5}
+  .foot__col{grid-column:span 2}
+  .foot__col.contact{grid-column:9 / 13}
+  .foot h4{font-family:var(--ui);font-size:11px;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--text-3);margin-bottom:18px}
+  .foot a{display:block;font-family:var(--ui);font-size:13px;line-height:2.1;color:var(--text);transition:color .2s}
+  .foot a:hover{color:var(--accent)}
+  .colophon{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding-block:24px;
+    border-top:1px solid var(--line);font-family:var(--ui);font-size:11.5px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--text-3)}
+  .colophon a:hover{color:var(--accent)}
+
+  /* ---------------- reveal (no-JS safe) ---------------- */
+  .reveal{opacity:1}
+  html.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease}
+  html.js .reveal.in{opacity:1;transform:none}
+
+  /* ---------------- responsive ---------------- */
+  @media(max-width:980px){
+    .ab-hero__in{align-items:end}
+    .ab-hero__text{grid-column:1 / 7}
+    .ab-hero__portrait{grid-column:7 / 13}
+    .bio__head h2{grid-column:4 / 13}
+    .bio__body{grid-column:4 / 13}
+    .pull{grid-column:4 / 13}
+  }
+  @media(max-width:860px){
+    .nav__links,.invert.desk{display:none}
+    .burger{display:flex}
+    .nav.open .mobile{display:flex}
+    .mobile{display:none;position:fixed;inset:78px 0 auto 0;flex-direction:column;background:var(--bg);
+      border-bottom:1px solid var(--line);padding:14px var(--pad) 26px;gap:4px;z-index:49}
+    .mobile a{font-family:var(--ui);font-size:14px;letter-spacing:.06em;text-transform:uppercase;
+      color:var(--text);padding:14px 0;border-bottom:1px solid var(--line)}
+    .mobile .invert{display:inline-flex;align-self:flex-start;margin-top:16px}
+
+    .ab-hero{padding-inline:var(--pad)}
+    .ab-hero__in{grid-template-columns:1fr;gap:clamp(32px,6vh,52px)}
+    .ab-hero__text{grid-column:1 / -1;order:1}
+    .ab-hero__name{font-size:clamp(44px,12vw,72px)}
+    .ab-hero__portrait{grid-column:1 / -1;order:0;justify-content:flex-start;transform:none!important}
+    .ab-hero__portrait figure{width:min(72%,360px)}
+    .ab-hero__portrait figcaption{text-align:left}
+
+    .bio__head .label,.bio__lead-label{grid-column:1 / 13;margin-bottom:6px}
+    .bio__head h2{grid-column:1 / 13}
+    .bio__body{grid-column:1 / 13}
+    .pull{grid-column:1 / 13}
+
+    .facts__grid{grid-template-columns:1fr 1fr;gap:28px}
+    .titles .s-head h2{grid-column:1 / 9}
+    .titles .s-head .label{grid-column:1 / 13;text-align:left;margin-top:4px}
+    .titles__grid{grid-template-columns:1fr;gap:clamp(28px,6vh,44px)}
+
+    .foot__brand{grid-column:1 / 13}
+    .foot__col{grid-column:span 4}
+    .foot__col.contact{grid-column:span 12}
+  }
+  @media(max-width:600px){
+    body{font-size:17px}
+    .facts__grid{grid-template-columns:1fr}
+    .title-card{grid-template-columns:1fr}
+    .title-card__cover{width:140px}
+    .foot__col{grid-column:span 6}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{transition:none!important;scroll-behavior:auto!important;animation:none!important}
+    html.js .reveal{opacity:1!important;transform:none!important}
+    .ab-hero__portrait{transform:none!important}
+  }
+</style>
+</head>
+
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<a href="#bio" class="skip">Skip to biography</a>
+
+<!-- ============ header ============ -->
+<div id="site-header"></div>
+<script src="nav.js"></script>
+
+<main id="top">
+
+  <!-- ============ about hero ============ -->
+  <section class="ab-hero" aria-label="About Dan Herbatschek">
+    <div class="ab-hero__in">
+      <div class="ab-hero__text">
+        <p class="ab-hero__eyebrow reveal">Founder &amp; author</p>
+        <h1 class="ab-hero__name reveal">Dan Herbatschek</h1>
+        <p class="ab-hero__role reveal">Founder of Grothendieck House &middot; author of both titles in the house</p>
+        <div class="ab-hero__flow reveal">
+          <p class="ab-hero__tagline">Language, time, and information &mdash; and the machines now built in its image<span class="accent">.</span></p>
+          <span class="ab-hero__rule"></span>
+        </div>
+      </div>
+
+      <!-- PLACEHOLDER portrait — empty frame, awaiting Dan's hi-res photo. When it arrives, drop in
+           <img src="…" class="…" alt="Portrait of Dan Herbatschek"> in place of .ab-hero__ph (4:5, object-fit:cover). -->
+      <div class="ab-hero__portrait reveal" data-px="-22">
+        <figure>
+          <div class="ab-hero__ph" role="img" aria-label="Portrait of Dan Herbatschek — coming soon"></div>
+          <figcaption>Founder &amp; Chief Executive, Ramsey Theory Group</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ biography ============ -->
+  <section class="bio wrap" id="bio" aria-label="Biography">
+    <div class="bio__head reveal">
+      <span class="label bio__lead-label">Biography</span>
+      <h2>How language, time, and information came to organize both human thought and the machines built in its image.</h2>
+    </div>
+
+    <div class="bio__body reveal">
+      <p class="lede">Dan Herbatschek founded Grothendieck House to publish the kind of books the house is
+        named for &mdash; work concerned with the deep structure of an idea rather than its surface. He is
+        the author of its first two titles, <span class="i">The Predictive Present</span> and
+        <span class="i">How Language Works</span>, and the press is, in part, an extension of the questions
+        that have occupied his thinking and his writing: how language, time, and information came to organize
+        both human thought and the machines now built in its image.</p>
+
+      <p>A mathematician by training, Herbatschek graduated from Columbia University &mdash; Summa Cum Laude,
+        Phi Beta Kappa &mdash; where he studied mathematics, philosophy, and intellectual history before
+        completing graduate work in computational mathematics. His thesis, <span class="i">The Reconstruction
+        of Language and Time: Mathematics, Artificial Languages, and the Changing Idea of Time in the
+        Scientific Revolution</span>, was awarded the university's Lily Prize and set the line of inquiry he
+        has followed since: how formal languages and the measurement of time produced the information
+        architectures underneath modern intelligence.</p>
+
+      <p>That inquiry is not only theoretical. Herbatschek is the Founder and Chief Executive of Ramsey Theory
+        Group, a technology holding firm headquartered in New Jersey with operations in Los Angeles, New
+        Jersey, and Paris, where he builds enterprise AI systems, software platforms, and cybersecurity
+        infrastructure across healthcare, logistics, and other industries. He came to the work first as an
+        investment and data-management consultant, and still programs.</p>
+    </div>
+
+    <!-- pull-quote: the closing thought of the paragraph above, elevated -->
+    <figure class="pull reveal">
+      <p>The books and the companies are, for him, two registers of the same subject.</p>
+    </figure>
+
+    <div class="bio__body reveal">
+      <p>He writes the <span class="i">Open Mind</span> essays on epistemology, the history of science, and
+        the philosophy of mathematics, and examines forecasting and probability at <span class="i">The
+        Predictive Present</span>. Beyond his own work, he founded the Dan Herbatschek Scholarship for
+        students from nontraditional backgrounds entering mathematics and machine learning.</p>
+
+      <p>He trains in boxing, reads widely in early modern thought, and lives in New York with his wife and
+        three children.</p>
+    </div>
+  </section>
+
+  <!-- ============ facts strip ============ -->
+  <section class="facts" aria-label="At a glance">
+    <div class="wrap">
+      <div class="facts__grid">
+        <div class="fact reveal">
+          <div class="k">Education</div>
+          <div class="v">Columbia University<br>Summa Cum Laude &middot; Phi Beta Kappa</div>
+        </div>
+        <div class="fact reveal">
+          <div class="k">Field</div>
+          <div class="v">Mathematics, software, and the philosophy of science</div>
+        </div>
+        <div class="fact reveal">
+          <div class="k">Titles</div>
+          <div class="v"><span class="i">The Predictive Present</span> (Foundations, Vol.&nbsp;001)<br>
+            <span class="i">How Language Works</span> (Foundations, Vol.&nbsp;002)</div>
+        </div>
+        <div class="fact reveal">
+          <div class="k">Essays</div>
+          <div class="v"><a href="https://danherbatschek.com" target="_blank" rel="noopener">danherbatschek.com</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ titles in the house ============ -->
+  <section class="titles wrap" aria-label="Titles by Dan Herbatschek">
+    <div class="s-head reveal">
+      <h2>Titles in the house</h2>
+      <span class="label">Both written by Dan Herbatschek</span>
+    </div>
+    <div class="titles__grid">
+      <article class="title-card reveal">
+        <a class="title-card__cover" href="books.html" aria-label="The Predictive Present">
+          <img src="https://cdn.sanity.io/images/nsluxlfc/production/5ba37e34ac8fd3b048378944526affd05b330e81-1122x1402.png?w=520&auto=format"
+               width="1122" height="1402" loading="lazy" alt="Cover of The Predictive Present">
+        </a>
+        <div class="title-card__body">
+          <div class="title-card__folio"><span class="rule"></span><span class="n">Foundations &middot; Vol. 001</span></div>
+          <h3 class="title-card__name"><a href="books.html">The Predictive Present</a></h3>
+          <p class="title-card__sub">Language, Time, and the Rise of Information</p>
+          <p class="title-card__meta">Hardcover &middot; 2026</p>
+        </div>
+      </article>
+
+      <article class="title-card reveal">
+        <a class="title-card__cover" href="books.html" aria-label="How Language Works">
+          <img src="https://cdn.sanity.io/images/nsluxlfc/production/5b896b059637754f89876091151603db071f752a-1122x1402.png?w=520&auto=format"
+               width="1122" height="1402" loading="lazy" alt="Cover of How Language Works">
+        </a>
+        <div class="title-card__body">
+          <div class="title-card__folio"><span class="rule"></span><span class="n">Foundations &middot; Vol. 002</span></div>
+          <h3 class="title-card__name"><a href="books.html">How Language Works</a></h3>
+          <p class="title-card__sub">Mind, Meaning, and the Human World</p>
+          <p class="title-card__meta">Hardcover &middot; 2026</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ footer ============ -->
+<footer id="contact">
+  <div class="wrap grid foot">
+    <div class="foot__brand">
+      <a class="foot__mark" href="evolved-home-v3.html" aria-label="Grothendieck House — home">Grothendieck House</a>
+      <p>An independent publisher of rigorous nonfiction in mathematics, philosophy, and science.</p>
+    </div>
+    <div class="foot__col">
+      <h4>Read</h4>
+      <a href="books.html">Books</a>
+      <a href="authors.html">Authors</a>
+      <a href="about.html">About</a>
+      <a href="/submissions">Submissions</a>
+    </div>
+    <div class="foot__col">
+      <h4>For the trade</h4>
+      <a href="/trade/booksellers">Booksellers</a>
+      <a href="/trade/libraries">Libraries</a>
+      <a href="/trade/foreign-rights">Foreign rights</a>
+      <a href="/press">Press</a>
+    </div>
+    <div class="foot__col contact">
+      <h4>Contact</h4>
+      <a href="mailto:hello@grothendieckhouse.com">hello@grothendieckhouse.com</a>
+      <a href="mailto:submissions@grothendieckhouse.com">submissions@grothendieckhouse.com</a>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="colophon">
+      <span>&copy; 2026 Grothendieck House</span>
+      <span class="legal">
+        <a href="/privacy">Privacy</a>&nbsp;&nbsp;
+        <a href="/terms">Terms</a>&nbsp;&nbsp;
+        <a href="/accessibility">Accessibility</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var body = document.body;
+
+  /* ---- theme (dark default, light = the "white version") ---- */
+  var saved = null; try { saved = localStorage.getItem('gh-theme'); } catch(e){}
+  var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+  if (saved === 'light' || (saved === null && prefersLight)) body.classList.add('light');
+  function sync(){
+    var light = body.classList.contains('light');
+    ['invert','invert-m'].forEach(function(id){
+      var b = document.getElementById(id);
+      if (b){ b.textContent = light ? 'Dark' : 'Light'; b.setAttribute('aria-pressed', String(light)); }
+    });
+  }
+  function toggle(){
+    var light = body.classList.toggle('light');
+    try { localStorage.setItem('gh-theme', light ? 'light' : 'dark'); } catch(e){}
+    sync();
+  }
+  ['invert','invert-m'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggle); });
+  sync();
+
+  /* ---- mobile menu ---- */
+  var nav = document.getElementById('nav'), burger = document.getElementById('burger');
+  burger.addEventListener('click', function(){
+    var open = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', String(open));
+  });
+  document.querySelectorAll('#mobile a').forEach(function(a){
+    a.addEventListener('click', function(){ nav.classList.remove('open'); burger.setAttribute('aria-expanded','false'); });
+  });
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- reveal on scroll (the "flow") ---- */
+  var items = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)){
+    items.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+    items.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---- gentle portrait parallax as it crosses the viewport ---- */
+  var finePointer = window.matchMedia && window.matchMedia('(pointer:fine)').matches;
+  if (!reduce){
+    var pxEls = Array.prototype.slice.call(document.querySelectorAll('[data-px]'));
+    var ticking = false;
+    function apply(){
+      ticking = false;
+      var vh = window.innerHeight;
+      for (var i=0;i<pxEls.length;i++){
+        var el = pxEls[i], r = el.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > vh+200) continue;
+        var rel = (r.top + r.height/2 - vh/2)/vh;        // -0.5..0.5 across viewport
+        var strength = parseFloat(el.getAttribute('data-px')) || 0;
+        el.style.setProperty('--py', (rel*strength).toFixed(1)+'px');
+      }
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){ ticking=true; requestAnimationFrame(apply); }
+    }, {passive:true});
+    apply();
+  }
+})();
+</script>
+</body>
+</html>
