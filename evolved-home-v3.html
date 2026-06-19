@@ -336,15 +336,15 @@
        and straddle the center so they overlap (cream behind-left, dark front-right). Horizontal/vertical
        placement uses left/right + margins (NOT transform), so it survives the reduced-motion transform:none
        reset below; transform carries only the slight rotateZ tilt. The JS hover-spread is already off ≤860. */
-    .hero__objects{position:relative;order:2;width:100%;height:clamp(300px,46vh,420px);display:block;
-      margin-top:clamp(36px,6vh,60px);perspective:1600px}
+    .hero__objects{position:relative;order:2;width:100%;height:clamp(280px,42vh,360px);display:block;
+      margin-top:clamp(16px,3vh,32px);perspective:1600px}
     .bw-front .cover-vid,.bw-back .cover-vid{height:clamp(220px,38vh,300px)}
     .bookwrap{position:absolute;top:50%;margin-top:calc(-.5 * clamp(220px,38vh,300px));margin-bottom:0}
     .bw-back{right:50%;left:auto;margin-right:-7%;margin-top:calc(-.5 * clamp(220px,38vh,300px) - 20px);
       transform:rotateZ(-4deg);z-index:1}
     .bw-front{left:50%;right:auto;margin-left:-7%;margin-top:calc(-.5 * clamp(220px,38vh,300px) + 14px);
       transform:rotateZ(2.5deg);z-index:2}
-    .hero__flow{position:static;order:3;margin-top:clamp(36px,6vh,56px)}
+    .hero__flow{display:none}/* hide the scroll-down line on mobile (frees the space, lifts the books up) */
 
     .s-head h2{grid-column:1 / 9;transform:none}/* label stacks below here — no baseline nudge needed */
     .s-head .label{grid-column:1 / 13;text-align:left;margin-top:4px}
