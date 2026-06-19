@@ -4,6 +4,12 @@
    right after <body>, so this runs synchronously (header exists before the
    page's bottom inline JS wires #invert / #burger / #mobile). Edit links ONCE
    here and every page updates — no more hand-syncing nav across files.
+
+   This file ALSO owns the mobile-menu behavior so it stays consistent on every
+   page: the burger morphs to an X when open, a dimming overlay sits under the
+   menu, background scroll is locked, and tapping the overlay (or Escape) closes
+   it. The per-page inline script still toggles `.open` on the burger + closes on
+   link click; here we only ADD close/overlay/lock behaviors (no double-binding).
    ========================================================================== */
 (function () {
   var HOME = 'evolved-home-v3.html';
@@ -46,8 +52,62 @@
       '<div class="mobile" id="mobile">' + links() +
         '<button class="invert" id="invert-m" type="button" aria-pressed="false">Light</button>' +
       '</div>' +
-    '</header>';
+    '</header>' +
+    // dimming backdrop — sibling of the header so it sits UNDER the header+menu (z-50) but OVER the page
+    '<div class="nav-overlay" id="nav-overlay"></div>';
+
+  // ---- styles for the mobile-menu chrome (injected once, after the page's own <style> so it wins) ----
+  var css =
+    /* burger → X morph */
+    '.burger span{transition:transform .32s cubic-bezier(.4,0,.2,1),opacity .2s ease}' +
+    '.nav.open .burger span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}' +
+    '.nav.open .burger span:nth-child(2){opacity:0}' +
+    '.nav.open .burger span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}' +
+    /* dimming overlay under the open menu */
+    '.nav-overlay{position:fixed;inset:0;z-index:48;background:rgba(8,6,4,.55);' +
+      '-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);' +
+      'opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s ease,visibility .28s ease}' +
+    '.nav.open ~ .nav-overlay{opacity:1;visibility:visible;pointer-events:auto}' +
+    '@media(min-width:861px){.nav-overlay{display:none}}' +   // desktop never needs it
+    /* lock background scroll while the menu is open (class set by the observer below) */
+    'html.nav-open,html.nav-open body{overflow:hidden}' +
+    '@media(prefers-reduced-motion:reduce){.burger span,.nav-overlay{transition:none}}';
 
   var slot = document.getElementById('site-header');
   if (slot) slot.outerHTML = html;
+
+  var styleEl = document.createElement('style');
+  styleEl.id = 'nav-menu-css';
+  styleEl.textContent = css;
+  document.head.appendChild(styleEl);
+
+  // ---- behavior: close on overlay tap / Escape, and lock scroll while open ----
+  var navEl = document.getElementById('nav');
+  var burger = document.getElementById('burger');
+  var overlay = document.getElementById('nav-overlay');
+
+  function close() {
+    if (!navEl.classList.contains('open')) return;
+    navEl.classList.remove('open');
+    if (burger) burger.setAttribute('aria-expanded', 'false');
+  }
+
+  if (overlay) overlay.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' || e.keyCode === 27) close();
+  });
+
+  // scroll-lock follows the `.open` class no matter who toggles it (burger / link / overlay / Escape)
+  if (navEl && 'MutationObserver' in window) {
+    var sync = function () {
+      document.documentElement.classList.toggle('nav-open', navEl.classList.contains('open'));
+    };
+    new MutationObserver(sync).observe(navEl, { attributes: true, attributeFilter: ['class'] });
+    sync();
+  }
+
+  // safety: if the viewport grows to desktop while the menu is open, close it (and release the lock)
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 860) close();
+  }, { passive: true });
 })();
