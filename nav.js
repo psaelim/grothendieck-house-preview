@@ -74,8 +74,20 @@
       'opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s ease,visibility .28s ease}' +
     '.nav.open ~ .nav-overlay{opacity:1;visibility:visible;pointer-events:auto}' +
     '@media(min-width:861px){.nav-overlay{display:none}}' +   // desktop never needs it
-    /* lock background scroll while the menu is open (class set by the observer below) */
-    'html.nav-open,html.nav-open body{overflow:hidden}' +
+    /* CRITICAL iOS FIX (mobile only): the header's own backdrop-filter (a) makes `.nav` the containing block
+       for the fixed `.mobile` menu — so once you scroll, the menu is positioned relative to the header's
+       scrolled-away origin and renders OFF-SCREEN (you only see the overlay); and (b) triggers the iOS
+       z-index compositing bug for the stuck sticky header. Dropping backdrop-filter on mobile makes `.mobile`
+       viewport-fixed again and restores normal stacking. Solid bg keeps the bar clean without the blur.
+       Desktop (>860) keeps the frosted header. */
+    '@media(max-width:860px){.nav{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--bg)}' +
+      /* keep the header pinned to the viewport while the menu is open. A sticky header DE-STICKS (jumps
+         off-screen, top→ -scrollY) the moment the page is scroll-locked, because the lock removes the scroll
+         container it depends on — that's why a scrolled-down + open menu showed only the overlay. */
+      '.nav.open{position:fixed;top:0;left:0;right:0}}' +
+    /* scroll lock: position:fixed on body preserves the scroll position (overflow:hidden alone does NOT on
+       iOS, and it also de-sticks the header). The observer sets top:-scrollY on lock and restores on unlock. */
+    'body.nav-locked{position:fixed;left:0;right:0;width:100%;overflow:hidden}' +
     '@media(prefers-reduced-motion:reduce){.burger span,.nav-overlay{transition:none}}';
 
   var slot = document.getElementById('site-header');
@@ -102,10 +114,23 @@
     if (e.key === 'Escape' || e.keyCode === 27) close();
   });
 
-  // scroll-lock follows the `.open` class no matter who toggles it (burger / link / overlay / Escape)
+  // scroll-lock follows the `.open` class no matter who toggles it (burger / link / overlay / Escape).
+  // Uses the position:fixed-body technique so the scroll position is preserved (and restored) on iOS.
   if (navEl && 'MutationObserver' in window) {
+    var lockedY = 0, isLocked = false;
     var sync = function () {
-      document.documentElement.classList.toggle('nav-open', navEl.classList.contains('open'));
+      var open = navEl.classList.contains('open');
+      if (open && !isLocked) {
+        lockedY = window.scrollY || window.pageYOffset || 0;
+        document.body.style.top = (-lockedY) + 'px';
+        document.body.classList.add('nav-locked');
+        isLocked = true;
+      } else if (!open && isLocked) {
+        document.body.classList.remove('nav-locked');
+        document.body.style.top = '';
+        isLocked = false;
+        window.scrollTo(0, lockedY);              // restore exactly where they were
+      }
     };
     new MutationObserver(sync).observe(navEl, { attributes: true, attributeFilter: ['class'] });
     sync();
