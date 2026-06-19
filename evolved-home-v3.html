@@ -331,11 +331,17 @@
     .hero__text{max-width:100%;order:1;transform:none!important}
     .hero__title{font-size:clamp(40px,11vw,68px);max-width:14ch}
     .hero__sub{max-width:52ch}
-    .hero__objects{position:static;order:2;width:100%;height:auto;display:flex;
-      justify-content:center;align-items:flex-end;gap:18px;margin-top:clamp(40px,7vh,64px)}
-    .bookwrap{position:static;transform:none!important;margin-top:0}
-    .book-front{height:clamp(220px,42vh,320px)}
-    .book-back{height:clamp(190px,36vh,280px);margin-bottom:14px}
+    /* hero books = overlapping ¾ pair (matches the desktop default), centered + scaled for phones.
+       The container becomes a relative STAGE in the column flow; the two books are absolutely placed
+       and straddle the center so they overlap (cream behind-left, dark front-right). Horizontal/vertical
+       placement uses left/right + margins (NOT transform), so it survives the reduced-motion transform:none
+       reset below; transform carries only the slight rotateZ tilt. The JS hover-spread is already off ≤860. */
+    .hero__objects{position:relative;order:2;width:100%;height:clamp(300px,46vh,420px);display:block;
+      margin-top:clamp(36px,6vh,60px);perspective:1600px}
+    .bw-front .cover-vid,.bw-back .cover-vid{height:clamp(220px,38vh,300px)}
+    .bookwrap{position:absolute;top:50%;margin-top:calc(-.5 * clamp(220px,38vh,300px));margin-bottom:0}
+    .bw-back{right:50%;left:auto;margin-right:-15%;transform:rotateZ(-4deg);z-index:1}
+    .bw-front{left:50%;right:auto;margin-left:-15%;transform:rotateZ(2.5deg);z-index:2}
     .hero__flow{position:static;order:3;margin-top:clamp(36px,6vh,56px)}
 
     .s-head h2{grid-column:1 / 9;transform:none}/* label stacks below here — no baseline nudge needed */
