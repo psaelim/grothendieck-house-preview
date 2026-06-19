@@ -65,9 +65,12 @@
     '.nav.open .burger span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}' +
     '.nav.open .burger span:nth-child(2){opacity:0}' +
     '.nav.open .burger span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}' +
-    /* dimming overlay under the open menu */
-    '.nav-overlay{position:fixed;inset:0;z-index:48;background:rgba(8,6,4,.55);' +
-      '-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);' +
+    /* dimming overlay under the open menu.
+       NOTE: deliberately NO backdrop-filter here. On iOS Safari an element with -webkit-backdrop-filter is
+       composited so it ignores z-index and paints OVER the sticky header (z-50) + menu (z-49) — which hid the
+       whole menu behind the blur. A plain translucent layer respects z-index, so the header+menu stay on top.
+       The dim alone gives the "separated" look. */
+    '.nav-overlay{position:fixed;inset:0;z-index:48;background:rgba(8,6,4,.66);' +
       'opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s ease,visibility .28s ease}' +
     '.nav.open ~ .nav-overlay{opacity:1;visibility:visible;pointer-events:auto}' +
     '@media(min-width:861px){.nav-overlay{display:none}}' +   // desktop never needs it
