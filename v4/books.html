@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ============================================================================
+     GROTHENDIECK HOUSE — homepage redesign v3
+     ("combine the live site with evolved-home-v2", per Dan's feedback video 2026-06-17)
+
+     v3 keeps v2's asymmetric editorial FRAMEWORK (Dan loves it) and grafts in the
+     parts of the LIVE site Dan loves, plus the motion ("the flow") he kept pointing at:
+       1. LOGO  — replaced the grotesque wordmark with the live site's exact serif
+                  GROTHENDIECK / HOUSE lockup (same format/font), Dan's explicit ask.
+       2. NAV   — Home · Books · Authors · About. Contact removed (Dan disliked it).
+       3. FLOW  — the hero books now float, drift on pointer parallax, and lift on
+                  scroll ("books come up, the text comes down"). This is the single
+                  thing Dan loved most about the live site. Sections flow in too.
+       4. LINE  — a gold ("kind of yellow") hairline scroll-line under the hero, and
+                  gold section rules — the live "line" Dan asked to keep, made yellow.
+       5. "The architecture beneath understanding." — the live hero tagline Dan loves,
+                  kept with its gold period.
+       6. CTA   — removed "Read the books" (hero) and the "Read more" book buttons
+                  (Dan disliked them). Final hero CTA copy PENDING from Dan.
+       7. ABOUT — uses the live site's current "Why the house exists" copy (Dan: the
+                  live text is final, reuse it verbatim).
+       8. AUTHORS — new "The writers we publish." section from the live site, featuring
+                  Dan Herbatschek. A full Dan-Brown-style author PAGE (big portrait +
+                  bio + inscription + more photos) is the planned follow-up — needs the
+                  hi-res photos/bio Dan said he'd send. Homepage portrait is a stand-in
+                  pulled from the live site.
+       9. Dark + light, both ("two versions" — Dan). Toggle top-right.
+
+     PENDING FROM DAN (placeholders flagged inline): final hero CTA copy; hi-res author
+     photos + full bio/inscription; remainder of the live About paragraph.
+     Type: Newsreader (serif) + Archivo (grotesque). Motion respects reduced-motion.
+============================================================================ -->
+
+<title>Books — Grothendieck House</title>
+<meta name="description" content="An independent publisher of rigorous nonfiction in mathematics, philosophy, and science. Books for the architecture of thought.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#14110E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Grothendieck House">
+<meta property="og:title" content="Grothendieck House — Books for the architecture of thought">
+<meta property="og:description" content="An independent publisher of rigorous nonfiction in mathematics, philosophy, and science.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.sanity.io">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=EB+Garamond:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet"><style>
+  :root{
+    /* dark (default) */
+    --bg:#14110E; --bg-2:#1A1712; --text:#ECE6D7; --text-2:#A8A092; --text-3:#7C7468;
+    --line:#2C2820; --line-2:#393428; --accent:#C9A24E; --accent-ink:#14110E;
+    --hair:.5px; /* gold hairline thickness — dial here (1 device px on retina) */
+    --hair-color:color-mix(in srgb,var(--accent) 40%,transparent); /* gold line opacity — 40% */
+    --logo:18px; /* GROTHENDIECK wordmark — exact live-site size (HOUSE scales from it) */
+    --shadow:0 44px 80px rgba(0,0,0,.62);
+    --serif:"Newsreader",Georgia,"Times New Roman",serif;
+    --ui:"Archivo","Helvetica Neue",Arial,sans-serif;
+    --wordmark:"EB Garamond",Georgia,"Times New Roman",serif; /* exact live-site logo font */
+    --pad:clamp(20px,5vw,80px);
+    --maxw:1320px;
+    /* left content edge — keeps the full-bleed hero text aligned to the contained sections */
+    --edge:max(var(--pad), calc((100vw - var(--maxw))/2 + var(--pad)));
+  }
+  body.light{
+    --bg:#F5F4F1; --bg-2:#EDECE7; --text:#1A1611; --text-2:#5B5953; --text-3:#868480;
+    --line:#E3E1DC; --line-2:#D4D2CC; --accent:#8A6A22; --accent-ink:#F5F4F1;
+    --shadow:0 40px 70px rgba(30,26,18,.18);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--text);font-family:var(--serif);
+    font-optical-sizing:auto;font-size:18px;line-height:1.6;
+    font-feature-settings:"kern" 1,"liga" 1;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    overflow-x:hidden;transition:background .45s ease,color .45s ease;
+  }
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-weight:400;text-wrap:balance}
+  p{text-wrap:pretty}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,32px)}
+  .label{font-family:var(--ui);font-size:11.5px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--text-3)}
+  .accent{color:var(--accent)}
+  .i{font-style:italic}
+  .nums{font-feature-settings:"onum" 1,"tnum" 1,"kern" 1}
+  .skip{position:absolute;left:-9999px}
+  .skip:focus{left:16px;top:12px;z-index:100;background:var(--bg-2);
+    font-family:var(--ui);font-size:13px;padding:10px 14px;border:1px solid var(--line)}
+
+  /* ---------------- header / logo (live-site serif lockup) ---------------- */
+  .nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);
+    backdrop-filter:saturate(140%) blur(10px);border-bottom:var(--hair) solid var(--hair-color);
+    transition:background .45s ease,border-color .45s ease}
+  .nav__in{display:flex;align-items:center;justify-content:space-between;gap:24px;
+    height:78px;max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+  /* GROTHENDIECK / HOUSE — serif caps, letterspaced, HOUSE centered beneath (matches live) */
+  /* logo — exact live-site spec: EB Garamond, 18/10px, +.14em / +.62em tracking, weight 500 */
+  .mark{font-family:var(--wordmark);line-height:.98;text-align:center;white-space:nowrap}
+  .mark__name{display:block;font-size:var(--logo);font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text)}
+  .mark__sub{display:block;font-size:calc(var(--logo) * .556);font-weight:500;letter-spacing:.62em;text-transform:uppercase;
+    color:var(--text-2);margin-top:4px;padding-left:.62em}
+  .nav__links{display:flex;gap:32px}
+  .nav__links a{font-family:var(--ui);font-size:12px;font-weight:500;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--text-2);transition:color .2s;position:relative}
+  .nav__links a::after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:1px;
+    background:var(--accent);transition:right .25s ease}
+  .nav__links a:hover,.nav__links a[aria-current]{color:var(--text)}
+  .nav__links a:hover::after{right:0}
+  .nav__right{display:flex;align-items:center;gap:16px}
+  .invert{font-family:var(--ui);font-size:11px;font-weight:500;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--text-2);background:none;border:1px solid var(--line-2);
+    padding:8px 14px;cursor:pointer;transition:color .2s,border-color .2s}
+  .invert:hover{color:var(--text);border-color:var(--text)}
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px}
+  .burger span{width:24px;height:1.5px;background:var(--text)}
+  .mobile{display:none}
+
+  /* ---------------- hero (asymmetric, objects bleed right, "the flow") ---------------- */
+  .hero{position:relative;min-height:calc(100svh - 78px);display:flex;align-items:center;
+    padding-left:var(--edge);padding-right:var(--pad);
+    padding-block:clamp(40px,7vh,90px);overflow:hidden}
+  .hero__text{position:relative;z-index:3;max-width:min(54vw,660px);will-change:transform}
+  .hero__kicker{margin-bottom:clamp(22px,4vh,38px)}
+  .hero__title{font-size:clamp(42px,6.2vw,92px);line-height:1.0;letter-spacing:-.028em;
+    max-width:12ch}
+  .hero__title .i{font-style:italic;letter-spacing:-.01em}
+  .hero__sub{font-family:var(--serif);font-size:clamp(16px,1.55vw,19px);color:var(--text-2);
+    max-width:42ch;margin-top:clamp(22px,3.4vh,32px);line-height:1.55}
+  .hero__cta{display:flex;align-items:center;gap:30px;margin-top:clamp(28px,4vh,40px);flex-wrap:wrap}
+  .cta-text{font-family:var(--ui);font-size:12px;font-weight:500;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--text-2);padding-bottom:4px;border-bottom:var(--hair) solid var(--hair-color);
+    transition:color .2s,border-color .2s}
+  .cta-text:hover{color:var(--text)}
+
+  /* floating book objects */
+  /* right edge aligns to the page content gutter (--edge, same as nav/LIGHT) — mirrors the hero text's
+     left --edge. WIDTH is capped to the right half of the maxw content band (≈580px) so on wide/ultrawide
+     screens the books don't balloon past the band midline and overlap the headline (50vw kicks in below). */
+  .hero__objects{position:absolute;top:0;right:var(--edge);bottom:0;width:min(50vw,580px);
+    z-index:1;pointer-events:auto;perspective:1600px}
+  /* layers: .bookwrap = position + hover-spread (transitioned, .9s);
+             .book-px  = live parallax/float (default) + mouse-driven 3D tilt (hover), JS-set, instant */
+  .bookwrap{position:absolute;will-change:transform;transform-style:preserve-3d;
+    transform:translate3d(var(--hx,0px),var(--hy,0px),0) rotateZ(var(--rot,0deg)) scale(var(--hs,1));
+    transition:transform .9s cubic-bezier(.4,0,.2,1)}
+  .book-px{position:relative;will-change:transform;transform-style:preserve-3d;
+    transform:translate3d(var(--px,0px),var(--py,0px),0) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+  /* each book = a single rendered 3D rotation clip (alpha WebM): ¾ angle at rest → face-on on hover.
+     The rotation is scrubbed in JS (clip currentTime ← hover progress), so it reverses cleanly. */
+  .cover-vid{display:block;width:auto;border-radius:2px;
+    filter:drop-shadow(var(--shadow));animation:float-a 7.5s ease-in-out infinite}
+  .bw-front .cover-vid{height:min(60vh,544px)}
+  .bw-back .cover-vid{height:min(60vh,544px);animation-name:float-b;animation-duration:9.5s}
+  @keyframes float-a{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+  @keyframes float-b{0%,100%{transform:translateY(0)}50%{transform:translateY(13px)}}
+  /* the dark book (front) reads too close to the dark bg — lift it; DARK MODE ONLY */
+  .bookwrap.bw-front .cover-vid{filter:brightness(1.18) contrast(1.04) saturate(1.08) drop-shadow(var(--shadow))}
+  body.light .bookwrap.bw-front .cover-vid{filter:drop-shadow(var(--shadow))}
+  /* anchor by CENTER (height-independent) so the pair stays vertically centered on tall screens;
+     half-height = min(30vh,272px); small ±stagger keeps the cream book a touch higher (the ¾ depth). */
+  .bw-front{right:5%;top:50%;margin-top:calc(-1 * min(30vh,272px) + 20px);z-index:2;--rot:2.5deg}
+  .bw-back{right:38%;top:50%;margin-top:calc(-1 * min(30vh,272px) - 20px);z-index:1;--rot:-4deg}
+
+  /* hover the hero art → books glide flat & side-by-side (dark right, cream left); the rotation itself
+     is scrubbed in JS (currentTime ← hover progress). Float settles so baselines align. */
+  .hero__objects:hover .cover-vid{animation:none}
+
+  /* the live "line" Dan loves — gold scroll-line, the hero's closing beat */
+  .hero__flow{margin-top:clamp(34px,5vh,52px);display:flex;flex-direction:column;
+    align-items:flex-start;gap:16px}
+  .scroll-line{position:relative;width:1px;height:56px;background:var(--line-2);overflow:hidden}
+  .scroll-line::after{content:"";position:absolute;left:0;top:-50%;width:1px;height:50%;
+    background:var(--hair-color);animation:drip 2.4s cubic-bezier(.6,0,.4,1) infinite}
+  @keyframes drip{0%{top:-55%}70%,100%{top:105%}}
+
+  /* ---------------- section frame ---------------- */
+  .section{padding-block:clamp(72px,11vh,150px)}
+  .s-head{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,32px);
+    align-items:baseline;padding-bottom:22px;border-bottom:1px solid var(--hair-color);
+    margin-bottom:clamp(40px,7vh,80px)}
+  .s-head h2{grid-column:1 / 8;font-size:clamp(28px,3.6vw,46px);letter-spacing:-.018em}
+  .s-head .label{grid-column:9 / 13;text-align:right;align-self:end}
+
+  /* ---------------- page hero (matches /about/ format) ---------------- */
+  .ah-hero{text-align:center;padding-block:clamp(64px,13vh,150px) clamp(40px,7vh,78px);
+    padding-inline:var(--pad)}
+  /* V4 [197]: page eyebrow bigger + bold */
+  .ah-hero .label{display:block;font-size:14px;font-weight:700;margin-bottom:clamp(16px,2.4vh,24px)}
+  .ah-hero__rule-top{width:54px;height:var(--hair);background:var(--hair-color);margin:0 auto clamp(26px,4vh,40px)}
+  .ah-hero h1{font-size:clamp(34px,5vw,72px);line-height:1.02;letter-spacing:-.022em;
+    max-width:16ch;margin:clamp(16px,2.4vh,28px) auto 0}/* V4 [197]: title now sits beneath the subtitle */
+  .ah-hero__sub{font-style:italic;color:var(--text-2);font-size:clamp(17px,1.8vw,21px);
+    line-height:1.4;max-width:44ch;margin:clamp(18px,2.6vh,26px) auto 0}
+  .ah-hero__rule{width:64px;height:var(--hair);background:var(--hair-color);margin:clamp(30px,5vh,46px) auto 0}
+  .ah-hero + .section{border-top:var(--hair) solid var(--hair-color)}
+
+  /* ---------------- books ---------------- */
+  .book{align-items:start;padding-block:clamp(56px,8vh,104px);border-bottom:1px solid var(--line)}
+  .book:first-of-type{padding-top:0}
+  .book:last-of-type{border-bottom:0}
+  .book__cover{grid-column:1 / 6;transform:translateY(var(--py,0px));will-change:transform}
+  .book.flip .book__cover{grid-column:8 / 13;order:2}
+  /* covers gently float ("the flow", like the hero/live-site books) — animation on the IMG so it composes
+     with the .book__cover scroll-parallax (--py) on the parent; the two books use different keyframes +
+     durations so they don't bob in lockstep. prefers-reduced-motion kills it via the global rule below. */
+  .book__cover img{width:100%;filter:drop-shadow(var(--shadow));
+    animation:float-a 8.5s ease-in-out infinite;will-change:transform}
+  .book.flip .book__cover img{animation:float-b 10s ease-in-out infinite}
+  .book__main{grid-column:7 / 13;padding-top:6px}
+  .book.flip .book__main{grid-column:1 / 7}
+  .book__folio{display:flex;align-items:center;gap:14px;margin-bottom:22px;color:var(--accent)}
+  .book__folio .n{font-family:var(--ui);font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+  /* V4 [222]: book titles on one line (wrap on phones, below) */
+  .book__title{font-size:clamp(32px,4.2vw,62px);line-height:1.02;letter-spacing:-.02em;white-space:nowrap}
+  .book__title a{transition:color .2s}
+  .book__title a:hover{color:var(--accent)}
+  .book__sub{font-style:italic;color:var(--text-2);font-size:clamp(18px,2vw,24px);margin-top:12px;line-height:1.2}
+  .book__by{font-family:var(--serif);letter-spacing:.02em;
+    font-size:19px;color:var(--text-2);margin-top:22px}
+  .book__desc{font-size:clamp(16px,1.5vw,18.5px);line-height:1.64;max-width:52ch;margin-top:24px}
+  /* meta row: tall vertical dividers between columns, no top rule (matches ref) */
+  .book__colophon{display:flex;margin-top:24px}
+  .book__colophon > div{padding:18px 52px;border-right:1px solid var(--line);min-width:150px}
+  .book__colophon > div:first-child{padding-left:0}
+  .book__colophon > div:last-child{border-right:0;padding-right:0}
+  .book__colophon .k{font-family:var(--ui);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--text-3);margin-bottom:16px}
+  .book__colophon .v{font-family:var(--ui);font-size:16px;letter-spacing:.02em;color:var(--text)}
+  .book__buy{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px}
+  .btn{font-family:var(--ui);font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+    padding:14px 26px;cursor:pointer;border:1px solid var(--text);transition:background .2s,color .2s,transform .1s}
+  .btn:active{transform:translateY(1px)}
+  /* default = outline; hover = filled (contained) */
+  .btn--solid{background:transparent;color:var(--text)}
+  .btn--solid:hover{background:var(--text);color:var(--bg)}
+
+  /* ---------------- authors (live "The writers we publish.") ---------------- */
+  .authors{border-top:1px solid var(--line)}
+  .authors__intro{text-align:center;margin:0 auto clamp(48px,8vh,84px)}
+  .authors__intro .label{display:block;margin-bottom:26px;color:var(--text-3)}
+  .authors__intro h2{font-size:clamp(34px,5.4vw,70px);line-height:1.02;letter-spacing:-.02em}
+  .authors__intro p{font-style:italic;color:var(--text-2);font-size:clamp(17px,1.8vw,21px);
+    margin:22px auto 0;max-width:34ch;line-height:1.4}
+  .authors__rule{width:64px;height:var(--hair);background:var(--hair-color);margin:26px auto 0}
+  /* featured author — circular portrait + bio that flows (homepage form of the Dan-Brown layout) */
+  .author{align-items:center;padding-top:clamp(8px,2vh,24px)}
+  .author__portrait{grid-column:1 / 5;display:flex;justify-content:center;
+    transform:translateY(var(--py,0px));will-change:transform}
+  .author__portrait img{width:min(82%,300px);aspect-ratio:1;border-radius:50%;
+    border:1px solid var(--line-2);background:var(--bg-2);
+    filter:drop-shadow(0 24px 48px rgba(0,0,0,.4))}
+  .author__main{grid-column:6 / 13}
+  .author__eyebrow{color:var(--accent);font-family:var(--ui);font-size:11px;font-weight:600;
+    letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
+  .author__name{font-size:clamp(30px,3.6vw,48px);line-height:1.04;letter-spacing:-.018em}
+  .author__role{font-style:italic;color:var(--text-2);font-size:clamp(16px,1.6vw,19px);margin-top:8px}
+  .author__bio{font-size:clamp(16px,1.5vw,18px);line-height:1.66;color:var(--text);max-width:54ch;margin-top:22px}
+  .author__bio p+p{margin-top:1em}
+  .author__meta{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-top:28px}
+  .author__titles{font-family:var(--ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+  .author__link{font-family:var(--ui);font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:10px;border-bottom:var(--hair) solid var(--hair-color);padding-bottom:4px;
+    transition:color .2s,border-color .2s}
+  .author__link .arrow{transition:transform .25s}
+  .author__link:hover .arrow{transform:translateX(5px)}
+
+  /* ---------------- manifesto (editorial position — v2 copy Dan likes) ---------------- */
+  .manifesto{background:var(--bg-2);transition:background .45s ease}
+  .manifesto .grid{align-items:start}
+  .manifesto__label{grid-column:1 / 3;padding-top:14px}
+  .manifesto__title{grid-column:3 / 12;font-size:clamp(30px,4.6vw,62px);line-height:1.08;letter-spacing:-.02em}
+  .manifesto__title em{font-style:italic;color:var(--accent)}
+  .manifesto__body{grid-column:3 / 10;margin-top:clamp(34px,5vh,52px);font-size:clamp(17px,1.65vw,20px);
+    line-height:1.62;max-width:60ch}
+  .manifesto__body::first-letter{font-family:var(--serif);font-weight:500;font-size:3.4em;line-height:.72;
+    float:left;padding:6px 12px 0 0;color:var(--accent)}
+  .manifesto__body p+p{margin-top:1.1em}
+
+  /* ---------------- about the house (live "Why the house exists" copy) ---------------- */
+  .about{border-top:1px solid var(--line)}
+  .about__label{grid-column:1 / 3;padding-top:6px}
+  .about__title{grid-column:3 / 8;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:-.014em}
+  .about__body{grid-column:9 / 13;font-size:15.5px;line-height:1.72;color:var(--text-2)}
+  .about__body p+p{margin-top:1em}
+
+  /* ---------------- footer ---------------- */
+  footer{border-top:var(--hair) solid var(--hair-color)}
+  .foot{padding-block:clamp(56px,8vh,92px);align-items:start}
+  .foot__brand{grid-column:1 / 5}
+  /* footer wordmark — one line, mixed-case, matching the live-site footer (EB Garamond 26/400) */
+  .foot__brand .foot__mark{display:inline-block;font-family:var(--wordmark);font-size:26px;
+    font-weight:400;line-height:1.1;letter-spacing:0;color:var(--text);transition:color .2s}
+  .foot__brand .foot__mark:hover{color:var(--accent)}
+  .foot__brand p{font-size:16px;color:var(--text-2);max-width:32ch;margin-top:18px;line-height:1.5}
+  .foot__col{grid-column:span 2}
+  .foot__col.contact{grid-column:9 / 13}
+  .foot h4{font-family:var(--ui);font-size:11px;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--text-3);margin-bottom:18px}
+  .foot a{display:block;font-family:var(--ui);font-size:13px;line-height:2.1;color:var(--text);transition:color .2s}
+  .foot a:hover{color:var(--accent)}
+  .colophon{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding-block:24px;
+    border-top:1px solid var(--line);font-family:var(--ui);font-size:11.5px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--text-3)}
+  .colophon a:hover{color:var(--accent)}
+
+  /* ---------------- reveal (no-JS safe) ---------------- */
+  .reveal{opacity:1}
+  html.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease}
+  html.js .reveal.in{opacity:1;transform:none}
+
+  /* ---------------- responsive ---------------- */
+  @media(max-width:1080px){
+    .hero__text{max-width:58vw}
+    .bw-front{right:2%}
+    .book-front{height:min(48vh,420px)}
+    .book-back{height:min(40vh,350px)}
+  }
+  @media(max-width:860px){
+    .nav__links,.invert.desk{display:none}
+    .burger{display:flex}
+    .nav.open .mobile{display:flex}
+    .mobile{display:none;position:fixed;inset:78px 0 auto 0;flex-direction:column;background:var(--bg);
+      border-bottom:1px solid var(--line);padding:14px var(--pad) 26px;gap:4px;z-index:49}
+    .mobile a{font-family:var(--ui);font-size:14px;letter-spacing:.06em;text-transform:uppercase;
+      color:var(--text);padding:14px 0;border-bottom:1px solid var(--line)}
+    .mobile .invert{display:inline-flex;align-self:flex-start;margin-top:16px}
+
+    .hero{flex-direction:column;justify-content:center;align-items:flex-start;
+      padding-inline:var(--pad);min-height:auto;padding-block:clamp(40px,8vh,80px) clamp(48px,9vh,90px)}
+    .hero__text{max-width:100%;order:1;transform:none!important}
+    .hero__title{font-size:clamp(40px,11vw,68px);max-width:14ch}
+    .hero__sub{max-width:52ch}
+    .hero__objects{position:static;order:2;width:100%;height:auto;display:flex;
+      justify-content:center;align-items:flex-end;gap:18px;margin-top:clamp(40px,7vh,64px)}
+    .bookwrap{position:static;transform:none!important;margin-top:0}
+    .book-front{height:clamp(220px,42vh,320px)}
+    .book-back{height:clamp(190px,36vh,280px);margin-bottom:14px}
+    .hero__flow{position:static;order:3;margin-top:clamp(36px,6vh,56px)}
+
+    .s-head h2{grid-column:1 / 9}
+    .s-head .label{grid-column:1 / 13;text-align:left;margin-top:4px}
+    .book__cover,.book.flip .book__cover{grid-column:1 / 6}
+    .book__main,.book.flip .book__main{grid-column:6 / 13}
+    .author__portrait{grid-column:1 / 13;margin-bottom:34px}
+    .author__main{grid-column:1 / 13}
+    .manifesto__label,.about__label{grid-column:1 / 13;margin-bottom:6px}
+    .manifesto__title{grid-column:1 / 13}
+    .manifesto__body{grid-column:1 / 13}
+    .about__title{grid-column:1 / 8}
+    .about__body{grid-column:1 / 13;margin-top:20px}
+    .foot__brand{grid-column:1 / 13}
+    .foot__col{grid-column:span 4}
+    .foot__col.contact{grid-column:span 12}
+  }
+  @media(max-width:600px){
+    body{font-size:17px}
+    .hero__title{font-size:clamp(36px,12vw,52px)}
+    .book__title{white-space:normal}/* V4 [222]: wrap on phones */
+    .book__cover,.book.flip .book__cover{grid-column:1 / 13;max-width:280px;order:0}
+    .book__main,.book.flip .book__main{grid-column:1 / 13;margin-top:28px}
+    .book__colophon > div{padding:12px 22px;min-width:0}
+    .foot__col{grid-column:span 6}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{transition:none!important;scroll-behavior:auto!important;animation:none!important}
+    html.js .reveal{opacity:1!important;transform:none!important}
+    .bookwrap,.hero__text,.book__cover,.author__portrait{transform:none!important}
+  }
+</style>
+</head>
+
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<a href="#books" class="skip">Skip to books</a>
+
+<!-- ============ header ============ -->
+<div id="site-header"></div>
+<script src="nav.js"></script>
+
+<main id="top">
+
+  <!-- ============ page hero (matches /about/ format) ============ -->
+  <section class="ah-hero" aria-label="Books">
+    <span class="ah-hero__rule-top reveal"></span>
+    <!-- V4 [197]: BOOKS eyebrow bigger+bold; New & Noteworthy moved beneath the italic subtitle -->
+    <p class="label reveal">Books</p>
+    <p class="ah-hero__sub reveal">The newest titles from the house.</p>
+    <h1 class="reveal">New &amp; Noteworthy</h1>
+    <span class="ah-hero__rule reveal"></span>
+  </section>
+
+  <!-- ============ books in print ============ -->
+  <section class="section wrap" id="books" aria-label="Books in print">
+
+    <!-- Book 1 -->
+    <article class="book grid reveal">
+      <div class="book__cover" data-px="-26">
+        <img src="https://cdn.sanity.io/images/nsluxlfc/production/5ba37e34ac8fd3b048378944526affd05b330e81-1122x1402.png?w=760&auto=format"
+             width="1122" height="1402" loading="lazy" alt="Cover of The Predictive Present">
+      </div>
+      <div class="book__main">
+        <div class="book__folio"><span class="n">The inaugural title</span></div>
+        <h3 class="book__title"><a href="/books/predictive-present">The Predictive Present</a></h3>
+        <p class="book__sub">Language, Time, and the Rise of Information</p>
+        <p class="book__by">Dan Herbatschek</p>
+        <p class="book__desc">On an ordinary morning the future arrives in small, polite suggestions.
+           The weather comes as a confidence interval, traffic as a probability, sentences finished
+           in pale gray. We have learned to call this a technological condition. This book argues that
+           it is also, and more deeply, a condition of language and time, traced from the grammar of
+           tense to the discipline of the calendar to the contemporary feed.</p>
+        <div class="book__colophon">
+          <div><div class="k">Format</div><div class="v">Hardcover</div></div>
+          <div><div class="k">Published</div><div class="v nums">2026</div></div>
+          <div><div class="k">Price</div><div class="v nums">$35</div></div>
+        </div>
+        <!-- "Read more" removed per Dan. TODO: point Buy direct at real commerce URL. -->
+        <div class="book__buy">
+          <a class="btn btn--solid" href="/books/predictive-present">Buy direct</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Book 2 -->
+    <article class="book flip grid reveal">
+      <div class="book__cover" data-px="-26">
+        <img src="https://cdn.sanity.io/images/nsluxlfc/production/5b896b059637754f89876091151603db071f752a-1122x1402.png?w=760&auto=format"
+             width="1122" height="1402" loading="lazy" alt="Cover of How Language Works">
+      </div>
+      <div class="book__main">
+        <div class="book__folio"><span class="n">The second title</span></div>
+        <h3 class="book__title"><a href="/books/how-language-works">How Language Works</a></h3>
+        <p class="book__sub">Mind, Meaning, and the Human World</p>
+        <p class="book__by">Dan Herbatschek</p>
+        <p class="book__desc">Before language is a system of signs, it is a way of being in time with
+           another mind. A sentence is more than a string of symbols. It is an act of coordination
+           between speaker and listener, between memory and anticipation. Herbatschek moves through the
+           structure of the problem, from phonology and the grammar of reference to the philosophy of
+           meaning and the cognitive architecture of speech, arguing that meaning is built between
+           people, in the work of interpretation every ordinary conversation performs.</p>
+        <div class="book__colophon">
+          <div><div class="k">Format</div><div class="v">Hardcover</div></div>
+          <div><div class="k">Published</div><div class="v nums">2026</div></div>
+          <div><div class="k">Price</div><div class="v nums">$35</div></div>
+        </div>
+        <div class="book__buy">
+          <a class="btn btn--solid" href="/books/how-language-works">Buy direct</a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+</main>
+
+<!-- ============ footer ============ -->
+<footer id="contact">
+  <div class="wrap grid foot">
+    <div class="foot__brand">
+      <a class="foot__mark" href="evolved-home-v3.html" aria-label="Grothendieck House — home">Grothendieck House</a>
+      <p>An independent publisher of rigorous nonfiction in mathematics, philosophy, and science.</p>
+    </div>
+    <div class="foot__col">
+      <h4>Read</h4>
+      <a href="books.html">Books</a>
+      <a href="authors.html">Authors</a>
+      <a href="about.html">About</a>
+      <a href="/submissions">Submissions</a>
+    </div>
+    <div class="foot__col">
+      <h4>For the trade</h4>
+      <a href="/trade/booksellers">Booksellers</a>
+      <a href="/trade/libraries">Libraries</a>
+      <a href="/trade/foreign-rights">Foreign rights</a>
+      <a href="/press">Press</a>
+    </div>
+    <div class="foot__col contact">
+      <h4>Contact</h4>
+      <a href="mailto:hello@grothendieckhouse.com">hello@grothendieckhouse.com</a>
+      <a href="mailto:submissions@grothendieckhouse.com">submissions@grothendieckhouse.com</a>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="colophon">
+      <span>&copy; 2026 Grothendieck House</span>
+      <span class="legal">
+        <a href="/privacy">Privacy</a>&nbsp;&nbsp;
+        <a href="/terms">Terms</a>&nbsp;&nbsp;
+        <a href="/accessibility">Accessibility</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var body = document.body;
+
+  /* ---- theme (dark default, light = the "white version" Dan wants) ---- */
+  var saved = null; try { saved = localStorage.getItem('gh-theme'); } catch(e){}
+  var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+  if (saved === 'light' || (saved === null && prefersLight)) body.classList.add('light');
+  function sync(){
+    var light = body.classList.contains('light');
+    ['invert','invert-m'].forEach(function(id){
+      var b = document.getElementById(id);
+      if (b){ b.textContent = light ? 'Dark' : 'Light'; b.setAttribute('aria-pressed', String(light)); }
+    });
+  }
+  function toggle(){
+    var light = body.classList.toggle('light');
+    try { localStorage.setItem('gh-theme', light ? 'light' : 'dark'); } catch(e){}
+    sync();
+  }
+  ['invert','invert-m'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggle); });
+  sync();
+
+  /* ---- mobile menu ---- */
+  var nav = document.getElementById('nav'), burger = document.getElementById('burger');
+  burger.addEventListener('click', function(){
+    var open = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', String(open));
+  });
+  document.querySelectorAll('#mobile a').forEach(function(a){
+    a.addEventListener('click', function(){ nav.classList.remove('open'); burger.setAttribute('aria-expanded','false'); });
+  });
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- reveal on scroll (the "flow") ---- */
+  var items = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)){
+    items.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+    items.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---- "the flow": hero book parallax (pointer + scroll) + section parallax ---- */
+  var finePointer = window.matchMedia && window.matchMedia('(pointer:fine)').matches;
+  if (!reduce){
+    var hero = document.getElementById('hero');
+    var heroText = document.querySelector('.hero__text');
+    var objects = document.querySelector('.hero__objects');
+    var bf = document.querySelector('.bw-front');
+    var bb = document.querySelector('.bw-back');
+    var vf = bf && bf.querySelector('.cover-vid');   // dark / Predictive Present rotation clip
+    var vb = bb && bb.querySelector('.cover-vid');   // cream / How Language Works rotation clip
+    var pxEls = Array.prototype.slice.call(document.querySelectorAll('[data-px]'));
+    var tX=0,tY=0, pX=0,pY=0, sY=window.scrollY||0, ticking=false, booksHover=false;
+    var ctX=0,ctY=0, rxC=0,ryC=0;            // cursor over the art (for the 3D tilt) + eased tilt angles
+    var TILT = 12;                            // max mouse-driven 3D tilt, degrees
+    // hover-progress (0 = ¾ rest, 1 = face-on) scrubs each clip's currentTime — reverses cleanly
+    var bookProg=0, vdurF=0, vdurB=0, seekF=-1, seekB=-1;
+    function vReady(v, set){ if(!v) return;
+      var cb=function(){ set(v.duration||0); try{ v.pause(); v.currentTime=0; }catch(e){} };
+      if (v.readyState>=1) cb(); v.addEventListener('loadedmetadata', cb);
+    }
+    vReady(vf, function(d){ vdurF=d; }); vReady(vb, function(d){ vdurB=d; });
+
+    if (finePointer && hero){
+      hero.addEventListener('mousemove', function(e){
+        var r = hero.getBoundingClientRect();
+        tX = (e.clientX - r.left)/r.width - 0.5;
+        tY = (e.clientY - r.top)/r.height - 0.5;
+      });
+      hero.addEventListener('mouseleave', function(){ tX = 0; tY = 0; });
+    }
+    if (finePointer && objects){
+      objects.addEventListener('mousemove', function(e){
+        var r = objects.getBoundingClientRect();
+        ctX = (e.clientX - r.left)/r.width - 0.5;   // -0.5..0.5 across the art
+        ctY = (e.clientY - r.top)/r.height - 0.5;
+      });
+    }
+    // ---- hover: glide the two books flat & side-by-side (dark left, cream right) ----
+    // Offsets are computed from the live layout (offset* metrics ignore transforms), so the spread
+    // stays centered/correct at any desktop width. Set inline on the wrappers; CSS transition animates.
+    var spread = null;
+    function computeSpread(){
+      spread = null;
+      if (!objects || !bf || !bb || window.innerWidth <= 860) return;
+      var Cw = objects.clientWidth, Ch = objects.clientHeight;
+      var f = {x:bf.offsetLeft, y:bf.offsetTop, w:bf.offsetWidth, h:bf.offsetHeight};
+      var b = {x:bb.offsetLeft, y:bb.offsetTop, w:bb.offsetWidth, h:bb.offsetHeight};
+      if (!f.w || !b.w) return;
+      // match HEIGHTS (not widths): the two clips have different aspect ratios, so width-matching
+      // would make the narrower dark book taller. Scale both to a shared height → balanced pair.
+      var Ht = Math.min(Ch*0.74, 478);
+      var hsF = Ht/f.h, hsB = Ht/b.h;                      // each book → same on-screen height
+      var wF = f.w*hsF, wB = b.w*hsB;                      // resulting widths (dark a touch narrower)
+      var GAP = Cw*0.03, yCenter = Ch*0.5;                 // spread shares the rest pair's vertical center
+      var pairLeft = (Cw - (wF + wB + GAP))/2;
+      var backCx  = pairLeft + wB/2;                       // cream (back) on the LEFT
+      var frontCx = pairLeft + wB + GAP + wF/2;            // dark (front) on the RIGHT
+      spread = {
+        front:{ hx:Math.round(frontCx          - (f.x+f.w/2)),
+                hy:Math.round(yCenter          - (f.y+f.h/2)), hs:hsF.toFixed(3) },
+        back: { hx:Math.round(backCx           - (b.x+b.w/2)),
+                hy:Math.round(yCenter          - (b.y+b.h/2)), hs:hsB.toFixed(3) }
+      };
+    }
+    function applySpread(on){
+      if (on && !spread) computeSpread();
+      [['front',bf],['back',bb]].forEach(function(p){
+        var s = spread && spread[p[0]], el = p[1]; if (!el) return;
+        if (on && s){
+          el.style.setProperty('--hx', s.hx+'px'); el.style.setProperty('--hy', s.hy+'px');
+          el.style.setProperty('--hs', s.hs);      el.style.setProperty('--rot','0deg');
+        } else {
+          ['--hx','--hy','--hs','--rot'].forEach(function(v){ el.style.removeProperty(v); });
+        }
+      });
+    }
+    computeSpread();
+    window.addEventListener('resize', function(){ computeSpread(); if (booksHover) applySpread(true); }, {passive:true});
+    // hovering the art recenters the parallax (so the spread sits clean) and triggers the glide
+    if (finePointer && objects){
+      objects.addEventListener('mouseenter', function(){ booksHover = true;  applySpread(true);  });
+      objects.addEventListener('mouseleave', function(){ booksHover = false; applySpread(false); });
+    }
+    window.addEventListener('scroll', function(){ sY = window.scrollY||0;
+      if(!ticking){ ticking=true; requestAnimationFrame(apply); }
+    }, {passive:true});
+
+    function apply(){
+      ticking=false;
+      var lift = Math.min(sY, window.innerHeight); // hero scroll, capped
+      var rxS = rxC.toFixed(2)+'deg', ryS = ryC.toFixed(2)+'deg';   // shared 3D tilt (whole pair)
+      if (bf){
+        bf.style.setProperty('--px', (pX*26).toFixed(1)+'px');
+        bf.style.setProperty('--py', (pY*20 - lift*0.12).toFixed(1)+'px');
+        bf.style.setProperty('--rx', rxS); bf.style.setProperty('--ry', ryS);
+      }
+      if (bb){
+        bb.style.setProperty('--px', (pX*14).toFixed(1)+'px');
+        bb.style.setProperty('--py', (pY*11 - lift*0.06).toFixed(1)+'px');
+        bb.style.setProperty('--rx', rxS); bb.style.setProperty('--ry', ryS);
+      }
+      if (heroText && window.innerWidth > 860){
+        heroText.style.transform = 'translateY('+(lift*0.06).toFixed(1)+'px)';
+      }
+      // section covers / portrait drift gently as they cross the viewport
+      var vh = window.innerHeight;
+      for (var i=0;i<pxEls.length;i++){
+        var el = pxEls[i], r = el.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > vh+200) continue;
+        var rel = (r.top + r.height/2 - vh/2)/vh;       // -0.5..0.5 across viewport
+        var strength = parseFloat(el.getAttribute('data-px')) || 0;
+        el.style.setProperty('--py', (rel*strength).toFixed(1)+'px');
+      }
+    }
+    function loop(){
+      var gx = booksHover ? 0 : tX, gy = booksHover ? 0 : tY;  // recenter parallax while books are spread
+      pX += (gx-pX)*0.06; pY += (gy-pY)*0.06;
+      // 3D tilt tracks the cursor while hovering the art; eases back to flat on leave
+      var trx = booksHover ? (-ctY*TILT) : 0, tryy = booksHover ? (ctX*TILT) : 0;
+      rxC += (trx-rxC)*0.12; ryC += (tryy-ryC)*0.12;
+      // scrub the rotation clips from hover progress (¾ angle → face-on), reversible on leave
+      bookProg += ((booksHover?1:0) - bookProg) * 0.12;
+      if (vf && vdurF){ var tf = bookProg*(vdurF-0.0005);
+        if (Math.abs(tf-seekF) > 0.006){ try{ vf.currentTime = tf; }catch(e){} seekF = tf; } }
+      if (vb && vdurB){ var tb = bookProg*(vdurB-0.0005);
+        if (Math.abs(tb-seekB) > 0.006){ try{ vb.currentTime = tb; }catch(e){} seekB = tb; } }
+      apply();
+      requestAnimationFrame(loop);
+    }
+    apply();
+    if (finePointer) loop();
+  }
+})();
+</script>
+</body>
+</html>
