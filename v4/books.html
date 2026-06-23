@@ -217,6 +217,13 @@
   .ah-hero__rule{width:64px;height:var(--hair);background:var(--hair-color);margin:clamp(30px,5vh,46px) auto 0}
   .ah-hero + .section{border-top:var(--hair) solid var(--hair-color)}
 
+  /* V4 [351:2 ref]: the "Books in print" section sits on a full-bleed band — #312B24 dark / #EBE8DF light
+     (matches Authors/About/Author profile). Same ::before technique (the .wrap section is width-capped). */
+  #books{position:relative;isolation:isolate}
+  #books::before{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 50vw);
+    width:100vw;background:#EBE8DF;z-index:-1}
+  body:not(.light) #books::before{background:#312B24}
+
   /* ---------------- books ---------------- */
   .book{align-items:start;padding-block:clamp(56px,8vh,104px);border-bottom:1px solid var(--line)}
   .book:first-of-type{padding-top:0}
