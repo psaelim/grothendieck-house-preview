@@ -33,6 +33,17 @@
 <meta property="og:site_name" content="Grothendieck House">
 <meta property="og:title" content="Dan Herbatschek — Grothendieck House">
 <meta property="og:description" content="Mathematician, founder of Ramsey Theory Group, and author of the house's first two titles.">
+<meta property="og:url" content="https://grothendieckhouse.com/authors/dan-herbatschek">
+<!-- og:image is relative so the preview shows the card; switch to absolute https at launch (scrapers require absolute). Canonical path /authors/dan-herbatschek is a best guess — confirm the live URL. -->
+<meta property="og:image" content="assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Grothendieck House — Books for the architecture of thought">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dan Herbatschek — Grothendieck House">
+<meta name="twitter:description" content="Mathematician, founder of Ramsey Theory Group, and author of the house's first two titles.">
+<meta name="twitter:image" content="assets/og-image.jpg">
+<link rel="canonical" href="https://grothendieckhouse.com/authors/dan-herbatschek">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +51,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=EB+Garamond:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet"><style>
   :root{
     /* dark (default) — identical to evolved-home-v3 */
-    --bg:#14110E; --bg-2:#1A1712; --text:#ECE6D7; --text-2:#A8A092; --text-3:#7C7468;
+    --bg:#14110E; --bg-2:#1A1712; --text:#ECE6D7; --text-2:#A8A092; --text-3:#9D9485; /* lifted #7C7468 -> #9D9485 for WCAG AA on small uppercase labels */
     --line:#2C2820; --line-2:#393428; --accent:#C9A24E; --accent-ink:#14110E;
     --hair:.5px;
     --hair-color:color-mix(in srgb,var(--accent) 40%,transparent);
@@ -54,7 +65,8 @@
     --edge:max(var(--pad), calc((100vw - var(--maxw))/2 + var(--pad)));
   }
   body.light{
-    --bg:#F5F4F1; --bg-2:#EDECE7; --text:#1A1611; --text-2:#5B5953; --text-3:#868480;
+    --bg:#F5F4F1; --bg-2:#EDECE7; --text:#1A1611; --text-2:#5B5953; --text-3:#6E6B63; /* darkened #868480 -> #6E6B63 for AA on cream */
+    --hair-color:color-mix(in srgb,var(--accent) 70%,transparent); /* light: lift gold hairlines to 70% so section rules/borders/footer read on cream */
     --line:#E3E1DC; --line-2:#D4D2CC; --accent:#8A6A22; --accent-ink:#F5F4F1;
     --shadow:0 40px 70px rgba(30,26,18,.18);
   }
@@ -435,14 +447,14 @@
       <a href="books.html">Books</a>
       <a href="authors.html">Authors</a>
       <a href="about.html">About</a>
-      <a href="/submissions">Submissions</a>
+      <a href="https://grothendieckhouse.com/submissions">Submissions</a>
     </div>
     <div class="foot__col">
       <h4>For the trade</h4>
-      <a href="/trade/booksellers">Booksellers</a>
-      <a href="/trade/libraries">Libraries</a>
-      <a href="/trade/foreign-rights">Foreign rights</a>
-      <a href="/press">Press</a>
+      <a href="https://grothendieckhouse.com/trade/booksellers">Booksellers</a>
+      <a href="https://grothendieckhouse.com/trade/libraries">Libraries</a>
+      <a href="https://grothendieckhouse.com/trade/foreign-rights">Foreign rights</a>
+      <a href="https://grothendieckhouse.com/press">Press</a>
     </div>
     <div class="foot__col contact">
       <h4>Contact</h4>
@@ -454,9 +466,9 @@
     <div class="colophon">
       <span>&copy; 2026 Grothendieck House</span>
       <span class="legal">
-        <a href="/privacy">Privacy</a>&nbsp;&nbsp;
-        <a href="/terms">Terms</a>&nbsp;&nbsp;
-        <a href="/accessibility">Accessibility</a>
+        <a href="https://grothendieckhouse.com/privacy">Privacy</a>&nbsp;&nbsp;
+        <a href="https://grothendieckhouse.com/terms">Terms</a>&nbsp;&nbsp;
+        <a href="https://grothendieckhouse.com/accessibility">Accessibility</a>
       </span>
     </div>
   </div>
@@ -487,12 +499,16 @@
 
   /* ---- mobile menu ---- */
   var nav = document.getElementById('nav'), burger = document.getElementById('burger');
-  burger.addEventListener('click', function(){
-    var open = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', String(open));
-  });
-  document.querySelectorAll('#mobile a').forEach(function(a){
-    a.addEventListener('click', function(){ nav.classList.remove('open'); burger.setAttribute('aria-expanded','false'); });
-  });
+  /* nav + burger are injected by nav.js — guard so a missing/late header can't throw here and
+     abort the rest of this script (scroll reveals etc. all run below). */
+  if (nav && burger) {
+    burger.addEventListener('click', function(){
+      var open = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', String(open));
+    });
+    document.querySelectorAll('#mobile a').forEach(function(a){
+      a.addEventListener('click', function(){ nav.classList.remove('open'); burger.setAttribute('aria-expanded','false'); });
+    });
+  }
 
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
