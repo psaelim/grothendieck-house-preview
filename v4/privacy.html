@@ -5,39 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- ============================================================================
-     GROTHENDIECK HOUSE — About the house  (/about/)
-     Companion to the homepage redesign (prototypes/evolved-home-v3.html).
-
-     This is the ABOUT page — about the HOUSE, not the author. Copy is the live
-     grothendieckhouse.com/about/ text, verbatim (Dan: the live text is current, reuse
-     it). The author bio lives separately on authors-dan-herbatschek.html.
-
-     Structure mirrors the live /about/: centered "Books for the architecture of
-     thought." hero, then "Why the house exists" — the house's editorial creed. Inherits
-     the v3 design system VERBATIM (EB Garamond wordmark · Newsreader serif · Archivo
-     grotesque, gold "kind of yellow" hairlines, nav, footer, dark+light toggle,
-     reveal-on-scroll "flow"). Motion respects reduced-motion.
+     GROTHENDIECK HOUSE — Privacy (/privacy)
+     V4 utility page. Copy from the live grothendieckhouse.com/privacy, verbatim.
+     Inherits the V4 design system from the about.html shell (nav.js header, shared
+     <style>, footer, dark+light toggle, reveal-on-scroll). Motion respects reduced-motion.
 ============================================================================ -->
 
-<title>About — Grothendieck House</title>
-<meta name="description" content="Why Grothendieck House exists: an independent publisher of method-bearing books in mathematics, philosophy, and science. Books for the architecture of thought.">
+<title>Privacy — Grothendieck House</title>
+<meta name="description" content="What Grothendieck House collects and why — the minimum required to publish, fulfill orders, and respond.">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#14110E">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Grothendieck House">
-<meta property="og:title" content="About — Grothendieck House">
-<meta property="og:description" content="Books that do structural work — a vocabulary, a framework, a way of seeing that did not exist before the book did.">
-<meta property="og:url" content="https://grothendieckhouse.com/about">
+<meta property="og:title" content="Privacy — Grothendieck House">
+<meta property="og:description" content="What Grothendieck House collects and why — the minimum required to publish, fulfill orders, and respond.">
+<meta property="og:url" content="https://grothendieckhouse.com/privacy">
 <!-- og:image is relative so the preview shows the card; switch to absolute https at launch (scrapers require absolute) -->
 <meta property="og:image" content="assets/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Grothendieck House — Books for the architecture of thought">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="About — Grothendieck House">
-<meta name="twitter:description" content="Books that do structural work — a vocabulary, a framework, a way of seeing that did not exist before the book did.">
+<meta name="twitter:title" content="Privacy — Grothendieck House">
+<meta name="twitter:description" content="What Grothendieck House collects and why — the minimum required to publish, fulfill orders, and respond.">
 <meta name="twitter:image" content="assets/og-image.jpg">
-<link rel="canonical" href="https://grothendieckhouse.com/about">
+<link rel="canonical" href="https://grothendieckhouse.com/privacy">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -144,6 +136,16 @@
   .pull__by{margin-top:18px;font-family:var(--ui);font-style:normal;font-size:12px;font-weight:600;
     letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
 
+  /* utility-page extras (inline mail links, labelled lists, legal "last reviewed" note) */
+  .creed__col .inline-link{color:var(--accent);border-bottom:1px solid var(--hair-color);transition:border-color .2s}
+  .creed__col .inline-link:hover{border-color:var(--accent)}
+  .creed__sub{color:var(--accent);font-family:var(--ui);font-size:11px;font-weight:600;
+    letter-spacing:.18em;text-transform:uppercase;margin-top:clamp(30px,5vh,46px)}
+  .creed__list{margin-top:14px;padding-left:1.3em}
+  .creed__list li{font-size:clamp(17px,1.6vw,19.5px);line-height:1.72;margin-top:.55em;padding-left:.2em}
+  .creed__meta{margin-top:clamp(30px,5vh,46px);font-family:var(--ui);font-size:12px;
+    letter-spacing:.04em;color:var(--text-3)}
+
   /* ---------------- closing line + CTA ---------------- */
   .ah-end{padding-block:clamp(56px,9vh,120px);border-top:var(--hair) solid var(--hair-color);
     background:var(--bg-2);transition:background .45s ease;text-align:center}
@@ -211,7 +213,7 @@
 
 <body>
 <script>document.documentElement.classList.add('js')</script>
-<a href="#why" class="skip">Skip to “Why the house exists”</a>
+<a href="#content" class="skip">Skip to content</a>
 
 <!-- ============ header ============ -->
 <div id="site-header"></div>
@@ -219,55 +221,31 @@
 
 <main id="top">
 
-  <!-- ============ hero (centered, like the live /about/) ============ -->
-  <section class="ah-hero" aria-label="About Grothendieck House">
+  <!-- ============ hero (centered, V4 page format) ============ -->
+  <section class="ah-hero" aria-label="Privacy">
     <span class="ah-hero__rule-top reveal"></span>
-    <p class="label reveal">About the house</p>
-    <h1 class="reveal">Books for the architecture of thought</h1>
+    <p class="label reveal">Legal</p>
+    <h1 class="reveal">Privacy</h1>
     <span class="ah-hero__rule reveal"></span>
   </section>
 
-  <!-- ============ why the house exists (live copy, verbatim) ============ -->
-  <section class="creed wrap" id="why" aria-label="Why the house exists">
+  <!-- ============ privacy copy (from live grothendieckhouse.com/privacy) ============ -->
+  <section class="creed wrap" id="content" aria-label="Privacy">
     <div class="creed__col">
-      <p class="creed__eyebrow reveal">Why the house exists</p>
-
+      <p class="creed__eyebrow reveal">Privacy</p>
       <div class="reveal">
-        <p class="lede">Grothendieck House began with a reader. Before it was a publisher, it was the
-          books &mdash; hundreds of them, filling Dan Herbatschek&rsquo;s office and home, stacked on desks and
-          lining the walls, most of them read and many read twice. He built his companies, in part, to buy
-          back the one thing serious reading and writing demand: time. Time to focus, to study, to follow a
-          question all the way down.</p>
-
-        <p>That conviction is the foundation of the house &mdash; that knowledge is worth building a life
-          around, and that the books worth making are the ones that don&rsquo;t hand you a finished thought but
-          hand you the means to build your own. Grothendieck House exists to publish that second kind.</p>
-
-        <p>It takes its name from Alexander Grothendieck, who remade mathematics by refusing to solve problems
-          on their own terms. He kept descending &mdash; toward foundations, toward abstraction, toward the
-          level at which the right structure made the answer inevitable. He did not write more clearly than his
-          contemporaries; he thought more architecturally. That is the standard the house holds its books to.</p>
+        <p class="lede">Grothendieck House is a small editorial publisher. The data we collect is the minimum required to publish books, fulfill orders, and respond to readers, booksellers, and authors who write to us. This page describes what we hold and why.</p>
+        <p>When you write to one of our addresses &mdash; hello@, submissions@, press@, trade@, rights@ &mdash; we receive whatever you choose to send: your email address, your name as you sign it, and the contents of your message. We do not enrich these records, append data from third parties, or share them with anyone outside the house.</p>
+        <p>When you order a book directly, we receive the shipping and billing information required to fulfill the order. Payments are processed by our fulfillment partner; we do not see card details.</p>
+        <p>The site itself uses no tracking pixels, no advertising cookies, and no third-party analytics that profile readers. Aggregate, anonymous request logs are kept by our hosting provider for security and to size capacity. No reader is identified in those logs.</p>
+        <p>Submissions correspondence is retained for as long as the manuscript is under consideration and for a brief period after decisions are made, so we can write a considered reply. Trade and press records are retained for the life of the relationship. Order records are retained to honor returns, replacements, and tax obligations. If you would like a record of yours removed, write to <a class="inline-link" href="mailto:hello@grothendieckhouse.com">hello@grothendieckhouse.com</a> and we will do so promptly unless we are legally required to retain it.</p>
+        <p>Only the editors and the small team that fulfills orders and answers correspondence have access to reader-identifying records. We do not sell, lease, license, or otherwise share these records with third parties. We do not use them to train models.</p>
+        <p>The site is served by Cloudflare. Sanity hosts the editorial content. Fulfillment is handled by our distribution partner. Each of these vendors processes data on our behalf under their own privacy policies; we choose them because their standards meet ours.</p>
+        <p>Our titles are written for adult readers. We do not knowingly collect information from anyone under 16.</p>
+        <p>For any privacy question &mdash; what we hold about you, how to correct it, how to have it removed &mdash; write to <a class="inline-link" href="mailto:hello@grothendieckhouse.com">hello@grothendieckhouse.com</a>. We respond to every letter.</p>
+        <p>This policy is reviewed annually. Material changes will be noted on this page with a revised date.</p>
       </div>
-    </div>
-
-    <!-- testimonial pull-quote — closes the about copy. ATTRIBUTION PENDING (placeholder below). -->
-    <figure class="pull reveal">
-      <p>&ldquo;If I could describe Dan, I&rsquo;d say this house will be one of his greatest achievements.&rdquo;</p>
-      <figcaption class="pull__by">[Name / title to confirm]</figcaption>
-    </figure>
-  </section>
-
-  <!-- ============ closing line + CTA ============ -->
-  <!-- V4 [261]: closing section brightens to cream on scroll (the creed above stays dark) -->
-  <section class="ah-end tint-on-scroll" aria-label="Why this house exists">
-    <div class="wrap">
-      <p class="ah-end__line reveal">If you have ever closed a book and felt that your mind had been rebuilt
-        rather than merely informed &mdash; reorganized, not updated &mdash; you already know why this house
-        exists<span class="accent">.</span></p>
-      <div class="ah-end__cta reveal">
-        <a class="ah-link" href="books.html">See the books <span class="arrow">&rarr;</span></a>
-        <a class="ah-link" href="authors.html">Meet the authors <span class="arrow">&rarr;</span></a>
-      </div>
+      <p class="creed__meta reveal">Last reviewed: 21 May 2026.</p>
     </div>
   </section>
 

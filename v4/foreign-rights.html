@@ -5,39 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- ============================================================================
-     GROTHENDIECK HOUSE — About the house  (/about/)
-     Companion to the homepage redesign (prototypes/evolved-home-v3.html).
-
-     This is the ABOUT page — about the HOUSE, not the author. Copy is the live
-     grothendieckhouse.com/about/ text, verbatim (Dan: the live text is current, reuse
-     it). The author bio lives separately on authors-dan-herbatschek.html.
-
-     Structure mirrors the live /about/: centered "Books for the architecture of
-     thought." hero, then "Why the house exists" — the house's editorial creed. Inherits
-     the v3 design system VERBATIM (EB Garamond wordmark · Newsreader serif · Archivo
-     grotesque, gold "kind of yellow" hairlines, nav, footer, dark+light toggle,
-     reveal-on-scroll "flow"). Motion respects reduced-motion.
+     GROTHENDIECK HOUSE — Foreign rights (/trade/foreign-rights)
+     V4 utility page. Copy from the live grothendieckhouse.com/trade/foreign-rights, verbatim.
+     Inherits the V4 design system from the about.html shell (nav.js header, shared
+     <style>, footer, dark+light toggle, reveal-on-scroll). Motion respects reduced-motion.
 ============================================================================ -->
 
-<title>About — Grothendieck House</title>
-<meta name="description" content="Why Grothendieck House exists: an independent publisher of method-bearing books in mathematics, philosophy, and science. Books for the architecture of thought.">
+<title>Foreign Rights — Grothendieck House</title>
+<meta name="description" content="Translation and territorial rights for Grothendieck House titles.">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#14110E">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Grothendieck House">
-<meta property="og:title" content="About — Grothendieck House">
-<meta property="og:description" content="Books that do structural work — a vocabulary, a framework, a way of seeing that did not exist before the book did.">
-<meta property="og:url" content="https://grothendieckhouse.com/about">
+<meta property="og:title" content="Foreign Rights — Grothendieck House">
+<meta property="og:description" content="Translation and territorial rights for Grothendieck House titles.">
+<meta property="og:url" content="https://grothendieckhouse.com/trade/foreign-rights">
 <!-- og:image is relative so the preview shows the card; switch to absolute https at launch (scrapers require absolute) -->
 <meta property="og:image" content="assets/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Grothendieck House — Books for the architecture of thought">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="About — Grothendieck House">
-<meta name="twitter:description" content="Books that do structural work — a vocabulary, a framework, a way of seeing that did not exist before the book did.">
+<meta name="twitter:title" content="Foreign Rights — Grothendieck House">
+<meta name="twitter:description" content="Translation and territorial rights for Grothendieck House titles.">
 <meta name="twitter:image" content="assets/og-image.jpg">
-<link rel="canonical" href="https://grothendieckhouse.com/about">
+<link rel="canonical" href="https://grothendieckhouse.com/trade/foreign-rights">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -144,6 +136,16 @@
   .pull__by{margin-top:18px;font-family:var(--ui);font-style:normal;font-size:12px;font-weight:600;
     letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
 
+  /* utility-page extras (inline mail links, labelled lists, legal "last reviewed" note) */
+  .creed__col .inline-link{color:var(--accent);border-bottom:1px solid var(--hair-color);transition:border-color .2s}
+  .creed__col .inline-link:hover{border-color:var(--accent)}
+  .creed__sub{color:var(--accent);font-family:var(--ui);font-size:11px;font-weight:600;
+    letter-spacing:.18em;text-transform:uppercase;margin-top:clamp(30px,5vh,46px)}
+  .creed__list{margin-top:14px;padding-left:1.3em}
+  .creed__list li{font-size:clamp(17px,1.6vw,19.5px);line-height:1.72;margin-top:.55em;padding-left:.2em}
+  .creed__meta{margin-top:clamp(30px,5vh,46px);font-family:var(--ui);font-size:12px;
+    letter-spacing:.04em;color:var(--text-3)}
+
   /* ---------------- closing line + CTA ---------------- */
   .ah-end{padding-block:clamp(56px,9vh,120px);border-top:var(--hair) solid var(--hair-color);
     background:var(--bg-2);transition:background .45s ease;text-align:center}
@@ -211,7 +213,7 @@
 
 <body>
 <script>document.documentElement.classList.add('js')</script>
-<a href="#why" class="skip">Skip to “Why the house exists”</a>
+<a href="#content" class="skip">Skip to content</a>
 
 <!-- ============ header ============ -->
 <div id="site-header"></div>
@@ -219,54 +221,22 @@
 
 <main id="top">
 
-  <!-- ============ hero (centered, like the live /about/) ============ -->
-  <section class="ah-hero" aria-label="About Grothendieck House">
+  <!-- ============ hero (centered, V4 page format) ============ -->
+  <section class="ah-hero" aria-label="Foreign rights">
     <span class="ah-hero__rule-top reveal"></span>
-    <p class="label reveal">About the house</p>
-    <h1 class="reveal">Books for the architecture of thought</h1>
+    <p class="label reveal">For the trade</p>
+    <h1 class="reveal">Foreign rights</h1>
     <span class="ah-hero__rule reveal"></span>
   </section>
 
-  <!-- ============ why the house exists (live copy, verbatim) ============ -->
-  <section class="creed wrap" id="why" aria-label="Why the house exists">
+  <!-- ============ foreign rights copy (from live grothendieckhouse.com/trade/foreign-rights) ============ -->
+  <section class="creed wrap" id="content" aria-label="Foreign rights">
     <div class="creed__col">
-      <p class="creed__eyebrow reveal">Why the house exists</p>
-
+      <p class="creed__eyebrow reveal">Foreign rights</p>
       <div class="reveal">
-        <p class="lede">Grothendieck House began with a reader. Before it was a publisher, it was the
-          books &mdash; hundreds of them, filling Dan Herbatschek&rsquo;s office and home, stacked on desks and
-          lining the walls, most of them read and many read twice. He built his companies, in part, to buy
-          back the one thing serious reading and writing demand: time. Time to focus, to study, to follow a
-          question all the way down.</p>
-
-        <p>That conviction is the foundation of the house &mdash; that knowledge is worth building a life
-          around, and that the books worth making are the ones that don&rsquo;t hand you a finished thought but
-          hand you the means to build your own. Grothendieck House exists to publish that second kind.</p>
-
-        <p>It takes its name from Alexander Grothendieck, who remade mathematics by refusing to solve problems
-          on their own terms. He kept descending &mdash; toward foundations, toward abstraction, toward the
-          level at which the right structure made the answer inevitable. He did not write more clearly than his
-          contemporaries; he thought more architecturally. That is the standard the house holds its books to.</p>
-      </div>
-    </div>
-
-    <!-- testimonial pull-quote — closes the about copy. ATTRIBUTION PENDING (placeholder below). -->
-    <figure class="pull reveal">
-      <p>&ldquo;If I could describe Dan, I&rsquo;d say this house will be one of his greatest achievements.&rdquo;</p>
-      <figcaption class="pull__by">[Name / title to confirm]</figcaption>
-    </figure>
-  </section>
-
-  <!-- ============ closing line + CTA ============ -->
-  <!-- V4 [261]: closing section brightens to cream on scroll (the creed above stays dark) -->
-  <section class="ah-end tint-on-scroll" aria-label="Why this house exists">
-    <div class="wrap">
-      <p class="ah-end__line reveal">If you have ever closed a book and felt that your mind had been rebuilt
-        rather than merely informed &mdash; reorganized, not updated &mdash; you already know why this house
-        exists<span class="accent">.</span></p>
-      <div class="ah-end__cta reveal">
-        <a class="ah-link" href="books.html">See the books <span class="arrow">&rarr;</span></a>
-        <a class="ah-link" href="authors.html">Meet the authors <span class="arrow">&rarr;</span></a>
+        <p class="lede">World rights for all Grothendieck House titles are held by the house.</p>
+        <p>For translation rights &mdash; full or territorial &mdash; write to <a class="inline-link" href="mailto:rights@grothendieckhouse.com">rights@grothendieckhouse.com</a> with the title of interest, the language and territory, and your publishing house. We respond to every inquiry.</p>
+        <p>We are looking for editorial partners whose lists demonstrate the same commitments as our own.</p>
       </div>
     </div>
   </section>
