@@ -257,7 +257,13 @@
   .btn--solid:hover{background:var(--text);color:var(--bg)}
 
   /* ---------------- authors (live "The writers we publish.") ---------------- */
-  .authors{border-top:1px solid var(--line)}
+  .authors{border-top:1px solid var(--line);position:relative;isolation:isolate}
+  /* V4 [368:2 ref]: author block sits on a full-bleed band, per Figma — warm-dark #312B24 in dark mode,
+     soft warm off-white #EBE8DF in light mode. Same full-bleed ::before technique as the old
+     tint-on-scroll (the .wrap section is width-capped, so the band needs 100vw). */
+  .authors::before{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 50vw);
+    width:100vw;background:#EBE8DF;z-index:-1}
+  body:not(.light) .authors::before{background:#312B24}
   .authors__intro{text-align:center;margin:0 auto clamp(48px,8vh,84px)}
   .authors__intro .label{display:block;margin-bottom:26px;color:var(--text-3)}
   .authors__intro h2{font-size:clamp(34px,5.4vw,70px);line-height:1.02;letter-spacing:-.02em}

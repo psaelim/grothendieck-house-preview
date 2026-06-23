@@ -128,14 +128,20 @@
   .ah-hero__rule{width:64px;height:var(--hair);background:var(--hair-color);margin:clamp(30px,5vh,46px) auto 0}
 
   /* ---------------- "why the house exists" — editorial creed ---------------- */
-  .creed{padding-block:clamp(48px,8vh,110px);border-top:var(--hair) solid var(--hair-color)}
+  .creed{padding-block:clamp(48px,8vh,110px);border-top:var(--hair) solid var(--hair-color);
+    position:relative;isolation:isolate}
+  /* V4 [370:2 ref]: creed sits on a full-bleed band — #312B24 dark / #EBE8DF light (matches Authors).
+     Same ::before technique as the Authors band (the .wrap section is width-capped, so it needs 100vw). */
+  .creed::before{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 50vw);
+    width:100vw;background:#EBE8DF;z-index:-1}
+  body:not(.light) .creed::before{background:#312B24}
   .creed__col{max-width:64ch;margin:0 auto}
   .creed__eyebrow{color:var(--accent);font-family:var(--ui);font-size:11px;font-weight:600;
     letter-spacing:.18em;text-transform:uppercase;margin-bottom:clamp(26px,4vh,38px)}
   .creed__col p{font-size:clamp(17px,1.6vw,19.5px);line-height:1.72}
   .creed__col p+p{margin-top:1.2em}
-  .creed__col .lede::first-letter{font-family:var(--serif);font-weight:500;font-size:3.4em;line-height:.72;
-    float:left;padding:6px 12px 0 0;color:var(--accent)}
+  /* V4 [370:2 ref]: drop cap removed — the ref body is uniformly flush-left (the floated cap
+     indented the lede's first lines, breaking the left edge). Body now aligns like the ref. */
 
   .pull{max-width:64ch;margin:clamp(36px,6vh,60px) auto;padding-left:clamp(20px,2.4vw,32px);
     border-left:2px solid var(--accent)}
