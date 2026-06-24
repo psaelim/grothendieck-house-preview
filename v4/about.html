@@ -22,7 +22,7 @@
 <title>About — Grothendieck House</title>
 <meta name="description" content="Why Grothendieck House exists: an independent publisher of method-bearing books in mathematics, philosophy, and science. Books for the architecture of thought.">
 <meta name="color-scheme" content="dark light">
-<meta name="theme-color" content="#14110E">
+<meta name="theme-color" content="#0F1113">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Grothendieck House">
 <meta property="og:title" content="About — Grothendieck House">
@@ -44,8 +44,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=EB+Garamond:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet"><style>
   :root{
     /* dark (default) — identical to evolved-home-v3 */
-    --bg:#14110E; --bg-2:#1A1712; --text:#ECE6D7; --text-2:#A8A092; --text-3:#9D9485; /* lifted #7C7468 -> #9D9485 for WCAG AA on small uppercase labels */
-    --line:#2C2820; --line-2:#393428; --accent:#C9A24E; --accent-ink:#14110E;
+    --bg:#0F1113; --bg-2:#181B1F; --text:#E9ECEF; --text-2:#A4AAB1; --text-3:#8C939B; /* lifted #7C7468 -> #9D9485 for WCAG AA on small uppercase labels */
+    --line:#24282D; --line-2:#30353B; --accent:#82AAD0; --accent-ink:#0F1113;
     --hair:.5px;
     --hair-color:color-mix(in srgb,var(--accent) 40%,transparent);
     --logo:18px;
@@ -58,9 +58,9 @@
     --edge:max(var(--pad), calc((100vw - var(--maxw))/2 + var(--pad)));
   }
   body.light{
-    --bg:#F5F4F1; --bg-2:#EDECE7; --text:#1A1611; --text-2:#5B5953; --text-3:#6E6B63; /* darkened #868480 -> #6E6B63 for AA on cream */
+    --bg:#F4F5F7; --bg-2:#E9ECEF; --text:#15171A; --text-2:#54585E; --text-3:#646A71; /* darkened #868480 -> #6E6B63 for AA on cream */
     --hair-color:color-mix(in srgb,var(--accent) 70%,transparent); /* light: lift gold hairlines to 70% so section rules/borders/footer read on cream */
-    --line:#E3E1DC; --line-2:#D4D2CC; --accent:#8A6A22; --accent-ink:#F5F4F1;
+    --line:#E0E3E7; --line-2:#D0D4D9; --accent:#3C618A; --accent-ink:#F4F5F7;
     --shadow:0 40px 70px rgba(30,26,18,.18);
   }
 
@@ -120,7 +120,7 @@
   .ah-hero{text-align:center;padding-block:clamp(64px,13vh,150px) clamp(40px,7vh,78px);
     padding-inline:var(--pad)}
   /* V4 [197]: page eyebrow bigger + bold */
-  .ah-hero .label{display:block;font-size:14px;font-weight:700;margin-bottom:clamp(16px,2.4vh,24px)}
+  .ah-hero .label{display:block;font-size:16px;font-weight:700;margin-bottom:clamp(16px,2.4vh,24px)}
   .ah-hero__rule-top{width:54px;height:var(--hair);background:var(--hair-color);margin:0 auto clamp(26px,4vh,40px)}
   /* V4 [261]: "Books for the architecture of thought" on one line (wraps on phones, below) */
   .ah-hero h1{font-size:clamp(34px,5vw,72px);line-height:1.02;letter-spacing:-.022em;
@@ -128,20 +128,14 @@
   .ah-hero__rule{width:64px;height:var(--hair);background:var(--hair-color);margin:clamp(30px,5vh,46px) auto 0}
 
   /* ---------------- "why the house exists" — editorial creed ---------------- */
-  .creed{padding-block:clamp(48px,8vh,110px);border-top:var(--hair) solid var(--hair-color);
-    position:relative;isolation:isolate}
-  /* V4 [370:2 ref]: creed sits on a full-bleed band — #312B24 dark / #EBE8DF light (matches Authors).
-     Same ::before technique as the Authors band (the .wrap section is width-capped, so it needs 100vw). */
-  .creed::before{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 50vw);
-    width:100vw;background:#EBE8DF;z-index:-1}
-  body:not(.light) .creed::before{background:#312B24}
+  .creed{padding-block:clamp(48px,8vh,110px);border-top:var(--hair) solid var(--hair-color)}
   .creed__col{max-width:64ch;margin:0 auto}
   .creed__eyebrow{color:var(--accent);font-family:var(--ui);font-size:11px;font-weight:600;
     letter-spacing:.18em;text-transform:uppercase;margin-bottom:clamp(26px,4vh,38px)}
   .creed__col p{font-size:clamp(17px,1.6vw,19.5px);line-height:1.72}
   .creed__col p+p{margin-top:1.2em}
-  /* V4 [370:2 ref]: drop cap removed — the ref body is uniformly flush-left (the floated cap
-     indented the lede's first lines, breaking the left edge). Body now aligns like the ref. */
+  .creed__col .lede::first-letter{font-family:var(--serif);font-weight:500;font-size:3.4em;line-height:.72;
+    float:left;padding:6px 12px 0 0;color:var(--accent)}
 
   .pull{max-width:64ch;margin:clamp(36px,6vh,60px) auto;padding-left:clamp(20px,2.4vw,32px);
     border-left:2px solid var(--accent)}

@@ -62,13 +62,15 @@
     '.mark{transform:translateY(4pt)}' +
     /* V4 [4]: nav bar 4px taller (page CSS sets .nav__in height:78px; this wins, applies on every page) */
     '.nav__in{height:82px}' +
-    /* V4 [20]: nav menu font +1pt (page CSS sets .nav__links a font-size:12px; capped here per note) */
-    '.nav__links a{font-size:13px}' +
+    /* V4 [20]/[2026-06-24]: nav menu font +2pt total (page CSS sets .nav__links a font-size:12px; capped here) */
+    '.nav__links a{font-size:14px}' +
+    /* V4 [2026-06-24]: light/dark toggle matches the nav-menu font (size + tracking); page CSS had 11px/.12em */
+    '.invert{font-size:14px;letter-spacing:.1em}' +
     /* V4: consistent wide content band on big screens across ALL pages (matches the home page's >=1440 band) */
     '@media(min-width:1440px){:root{--maxw:1480px;--pad:clamp(44px,3vw,56px)}}' +
     /* V4 [59] site-wide: graded warm dark background on EVERY page (dark mode only) — matches the home page.
        body:not(.light) out-specifies the per-page :root --bg and the base body{background:var(--bg)}. */
-    'body:not(.light){--bg:#191510;--bg-2:#221A11;background:linear-gradient(176deg,#2B2318 0%,#1C170F 44%,#120E08 100%) fixed}' +
+    'body:not(.light){--bg:#0F1113;--bg-2:#181B1F;background:var(--bg)}' +
     /* burger → X morph */
     '.burger span{transition:transform .32s cubic-bezier(.4,0,.2,1),opacity .2s ease}' +
     '.nav.open .burger span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}' +
@@ -98,16 +100,16 @@
        iOS, and it also de-sticks the header). The observer sets top:-scrollY on lock and restores on unlock. */
     'body.nav-locked{position:fixed;left:0;right:0;width:100%;overflow:hidden}' +
     /* V4 [130]/[222]/[243]/[261]: scroll-driven section tint (shared). Mark a block .tint-on-scroll
-       (add .tint--half for a softer level); it brightens to a warm cream + dark text when centered in
+       (add .tint--half for a softer level); it brightens to a cool tint + dark text when centered in
        the viewport, reverts as the next block takes over. Full-bleed via ::before. Dark mode only. */
     '.tint-on-scroll{position:relative;isolation:isolate;transition:color .55s ease}' +
     '.tint-on-scroll::before{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;background:transparent;transition:background-color .55s ease;z-index:-1}' +
-    'body:not(.light) .tint-on-scroll.tint-on{--bg-2:#EDECE7;--text:#1A1611;--text-2:#5B5953;--text-3:#6E6B63;--line:#E3E1DC;--line-2:#D4D2CC;--accent:#8A6A22;--hair-color:color-mix(in srgb,var(--accent) 70%,transparent);color:var(--text)}' +
-    'body:not(.light) .tint-on-scroll.tint-on::before{background:#F3EEDF}' +          /* dark mode: default = brightest cream */
-    'body:not(.light) .tint-on-scroll.tint--half.tint-on::before{background:#DCD2BE}' + /* dark mode: softer "half" level */
-    /* light mode: page is already cream, so DEEPEN the active section to a warm tan for scroll separation [291] */
-    'body.light .tint-on-scroll.tint-on::before{background:#EAE0CC}' +
-    'body.light .tint-on-scroll.tint--half.tint-on::before{background:#F2ECDD}' +
+    'body:not(.light) .tint-on-scroll.tint-on{--bg-2:#E9ECEF;--text:#15171A;--text-2:#54585E;--text-3:#646A71;--line:#E0E3E7;--line-2:#D0D4D9;--accent:#3C618A;--hair-color:color-mix(in srgb,var(--accent) 70%,transparent);color:var(--text)}' +
+    'body:not(.light) .tint-on-scroll.tint-on::before{background:#ECF1F6}' +          /* dark mode: default = brightest cool tint */
+    'body:not(.light) .tint-on-scroll.tint--half.tint-on::before{background:#D2DCE6}' + /* dark mode: softer "half" level */
+    /* light mode: page is already light, so DEEPEN the active section to a cool grey for scroll separation [291] */
+    'body.light .tint-on-scroll.tint-on::before{background:#D2DBE4}' +
+    'body.light .tint-on-scroll.tint--half.tint-on::before{background:#E4EAF0}' +
     '@media(prefers-reduced-motion:reduce){.burger span,.nav-overlay,.tint-on-scroll,.tint-on-scroll::before{transition:none}}';
 
   var slot = document.getElementById('site-header');
