@@ -70,7 +70,7 @@
     '@media(min-width:1440px){:root{--maxw:1480px;--pad:clamp(44px,3vw,56px)}}' +
     /* V4 [59] site-wide: graded warm dark background on EVERY page (dark mode only) — matches the home page.
        body:not(.light) out-specifies the per-page :root --bg and the base body{background:var(--bg)}. */
-    'body:not(.light){--bg:#0F1113;--bg-2:#181B1F;background:var(--bg)}' +
+    'body:not(.light){--bg:#121212;--bg-2:#1B1B1B;background:var(--bg)}' +
     /* burger → X morph */
     '.burger span{transition:transform .32s cubic-bezier(.4,0,.2,1),opacity .2s ease}' +
     '.nav.open .burger span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}' +
@@ -104,7 +104,7 @@
        the viewport, reverts as the next block takes over. Full-bleed via ::before. Dark mode only. */
     '.tint-on-scroll{position:relative;isolation:isolate;transition:color .55s ease}' +
     '.tint-on-scroll::before{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;background:transparent;transition:background-color .55s ease;z-index:-1}' +
-    'body:not(.light) .tint-on-scroll.tint-on{--bg-2:#E9ECEF;--text:#15171A;--text-2:#54585E;--text-3:#646A71;--line:#E0E3E7;--line-2:#D0D4D9;--accent:#3C618A;--hair-color:color-mix(in srgb,var(--accent) 70%,transparent);color:var(--text)}' +
+    'body:not(.light) .tint-on-scroll.tint-on{--bg-2:#EAEAEA;--text:#15171A;--text-2:#54585E;--text-3:#646A71;--line:#E2E2E2;--line-2:#D4D4D4;--accent:#3C618A;--hair-color:color-mix(in srgb,#777777 70%,transparent);color:var(--text)}' +
     'body:not(.light) .tint-on-scroll.tint-on::before{background:#ECF1F6}' +          /* dark mode: default = brightest cool tint */
     'body:not(.light) .tint-on-scroll.tint--half.tint-on::before{background:#D2DCE6}' + /* dark mode: softer "half" level */
     /* light mode: page is already light, so DEEPEN the active section to a cool grey for scroll separation [291] */
