@@ -158,12 +158,11 @@
 
   /* ---------------- biography (long-form editorial measure) ---------------- */
   .bio{padding-block:clamp(56px,9vh,120px);border-top:var(--hair) solid var(--hair-color)}
-  .bio__head{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,32px);
-    align-items:baseline;padding-bottom:22px;margin-bottom:clamp(34px,5vh,56px)}
-  .bio__head .label{grid-column:1 / 4}
-  .bio__head h2{grid-column:4 / 12;font-size:clamp(22px,2.4vw,30px);line-height:1.3;
+  .bio__head{text-align:center;padding-bottom:22px;margin-bottom:clamp(34px,5vh,56px)}
+  .bio__head .label{display:block;margin-bottom:16px}
+  .bio__head h2{max-width:30ch;margin-inline:auto;font-size:clamp(22px,2.4vw,30px);line-height:1.3;
     letter-spacing:-.01em;color:var(--text-2);font-style:italic}
-  .bio__body{grid-column:4 / 11;max-width:62ch}
+  .bio__body{max-width:62ch;margin-inline:auto}
   .bio__lead-label{grid-column:1 / 4}
   .bio__body p{font-size:clamp(17px,1.55vw,19px);line-height:1.72}
   .bio__body p+p{margin-top:1.15em}
@@ -174,7 +173,7 @@
   .bio__body .lede::first-letter{font-family:var(--serif);font-weight:500;font-size:3.4em;line-height:.72;
     float:left;padding:6px 12px 0 0;color:var(--accent)}
 
-  .pull{grid-column:4 / 12;margin:clamp(34px,5vh,52px) 0;padding-left:clamp(20px,2.4vw,32px);
+  .pull{max-width:62ch;margin:clamp(34px,5vh,52px) auto;padding-left:clamp(20px,2.4vw,32px);
     border-left:2px solid var(--accent)}
   .pull p{font-family:var(--serif);font-style:italic;font-size:clamp(22px,3vw,34px);
     line-height:1.22;letter-spacing:-.012em;color:var(--text);max-width:20ch}
