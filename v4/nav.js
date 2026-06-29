@@ -104,7 +104,7 @@
        the viewport, reverts as the next block takes over. Full-bleed via ::before. Dark mode only. */
     '.tint-on-scroll{position:relative;isolation:isolate;transition:color .55s ease}' +
     '.tint-on-scroll::before{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;background:transparent;transition:background-color .55s ease;z-index:-1}' +
-    'body:not(.light) .tint-on-scroll.tint-on{--bg-2:#EAEAEA;--text:#15171A;--text-2:#54585E;--text-3:#646A71;--line:#E2E2E2;--line-2:#D4D4D4;--accent:#3C618A;--hair-color:color-mix(in srgb,#777777 70%,transparent);color:var(--text)}' +
+    'body:not(.light) .tint-on-scroll.tint-on{--bg-2:#EAEAEA;--text:#15171A;--text-2:#54585E;--text-3:#646A71;--line:#E2E2E2;--line-2:#D4D4D4;--accent:#2C66B5;--hair-color:color-mix(in srgb,#777777 70%,transparent);color:var(--text)}' +
     'body:not(.light) .tint-on-scroll.tint-on::before{background:#ECF1F6}' +          /* dark mode: default = brightest cool tint */
     'body:not(.light) .tint-on-scroll.tint--half.tint-on::before{background:#D2DCE6}' + /* dark mode: softer "half" level */
     /* light mode: page is already light, so DEEPEN the active section to a cool grey for scroll separation [291] */
